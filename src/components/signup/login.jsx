@@ -57,7 +57,7 @@ const LogIn=()=>{
             const authToken = localStorage.setItem("x-auth-token",datum.token);
             console.log("localStorage", authToken);
              alert('Successfully LoggedIn')
-             navigate("/home");
+             navigate("/banquetdashboard");
           } else {
             alert('Invalid Credentials')
             navigate("/");
@@ -97,7 +97,7 @@ const LogIn=()=>{
                 <Row xs={2} md={4} lg={6}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                 <b><Form.Label>Email address</Form.Label></b>
-                <Form.Control
+                <Form.Control className="input2"
                 aria-label="Enter Your Email Address"
                 placeholder="Enter Your Email Address"
                 aria-describedby="inputGroup-sizing-sm"
@@ -112,10 +112,11 @@ const LogIn=()=>{
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                 <b><Form.Label>Password</Form.Label></b>
 
-                <Form.Control
+                <Form.Control className="input2"
                 aria-label="Enter Your Password"
                 aria-describedby="inputGroup-sizing-sm"
                 placeholder="Enter Your Password"
+                type="password"
                 onChange={(e) => setPassword(e.target.value)}
                 value={data.password}
                 />
