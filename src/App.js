@@ -5,7 +5,8 @@ import LogIn from './components/signup/login';
 import SignUpForm from './components/signup/signupform';
 import Banquet from './components/banquetDashboard/banquet';
 import OrphanInfo from './components/orphanage/orphanage';
-// import { ProtectedRoute } from './components/protectedRoute';
+import { ProtectedRoute } from './components/protectedRoute';
+
 
 function App() {
   // const [banquetData, setBanquetData] = useState([])
@@ -21,8 +22,12 @@ function App() {
       <Route path='/signup' element={ <SignUpForm/>}></Route>
 
       
-
-      <Route path='/banquetdashboard' element={<Banquet/>}></Route>
+       
+      <Route path='/banquetdashboard' element={
+         <ProtectedRoute>
+      <Banquet/>
+      </ProtectedRoute>
+      }></Route>
 
       <Route path='/orphanagedashboard' element={<OrphanInfo/>}></Route>
 

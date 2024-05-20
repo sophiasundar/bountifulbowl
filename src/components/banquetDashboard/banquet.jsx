@@ -3,27 +3,33 @@ import axios from "axios";
 import { API } from "../global.js";
 import BanquetCard from "./banquetCards.jsx";
 import NavBar from "../navbar/navbar"
-
+import { AuthContext } from '../Context/AuthContext.js';
+import { useContext } from 'react';
 
 
 
     function Banquet(){
         const [banquetData, setBanquetData] = useState([])
-
-          const getBanquet = ()=>{
-             axios.get(`${API}/crud/foodlist`)
-               .then((res)=>{
-                if(res.status === 401){
-                    console.log(" Data Not Found ! ")
-                }
-                console.log(res.data);
-                setBanquetData(res.data);
-               })
+        const { isAuthenticated, token }  = useContext(AuthContext);
+        
+        const getBanquet = async () => {
+          try {
+            const response = await axios.get(`${API}/crud/foodlist`, {
+              headers: {
+                Authorization: token ? `Bearer ${token}` : '', 
+              },
+            });
+            setBanquetData(response.data);
+          } catch (error) {
+            console.error('Error fetching banquet data:', error);
           }
+        };
 
           useEffect(()=>{
-               getBanquet()
-          },[])
+            if (isAuthenticated) {
+              getBanquet();
+            }
+          },[isAuthenticated])
 
         return(
 
