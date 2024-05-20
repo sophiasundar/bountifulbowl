@@ -11,20 +11,29 @@ import { GiBerriesBowl } from "react-icons/gi";
        const navigate = useNavigate()
         return(
             <>
-              <Navbar bg="info" data-bs-theme="light">
+              <Navbar bg="secondary" data-bs-theme="light">
                 <Container>
                 <Button variant="light">
                   <Navbar.Brand href="/home" variant="light" > Bountiful Bowl <GiBerriesBowl color="red" size={35}/> </Navbar.Brand>
                   </Button>{' '}
                  
                   <Nav className="me-auto">
+                   
                   <Button className='addbtn2' variant="primary"
                                 onClick={()=>{
-                                  navigate('/home')
+                                  navigate('/banquetdashboard')
                                 }}
                     >
-                        Home page
+                        Banquet Info
                     </Button>
+                    <Button className='addbtn3' variant="primary"
+                                onClick={()=>{
+                                  navigate('/orphanagedashboard')
+                                }}
+                    >
+                        Orphanage Info
+                    </Button>
+                   
                   <Button variant="dark" className='logoutbtn'  size="sm" ><Nav.Link href="/"
                             
                   ><b>Log Out</b></Nav.Link></Button>{' '}
