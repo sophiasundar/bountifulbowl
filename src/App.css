@@ -17,6 +17,11 @@
   
 }
 
+@media (max-width: 768px) { 
+  body {
+    background-color: lightpink; 
+  }
+}
 .itemSpecs{
   margin-left: 10px;
 } 
@@ -189,4 +194,22 @@ border-radius: 10px;
   margin-right: 20px;
 }
 
+.addtable{
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 400px;
+    margin-right: 30px;
+    justify-content: space-between;
+}
 
+
+.edbtn{
+  display: flex;
+  justify-content: space-between;
+  
+}
+
+.ed{
+  margin-right: 10px;
+}

@@ -6,6 +6,8 @@ import SignUpForm from './components/signup/signupform';
 import Banquet from './components/banquetDashboard/banquet';
 import OrphanInfo from './components/orphanage/orphanage';
 import { ProtectedRoute } from './components/protectedRoute';
+import CrudTable from './components/crud/crudTable';
+
 
 
 function App() {
@@ -31,7 +33,7 @@ function App() {
 
       <Route path='/orphanagedashboard' element={<OrphanInfo/>}></Route>
 
-      <Route path='/banquetcrud'></Route>
+      <Route path='/banquetcrud' element = {<CrudTable/>}></Route>
 
       </Routes>
       

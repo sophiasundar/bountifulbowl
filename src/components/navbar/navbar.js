@@ -14,7 +14,7 @@ import { GiBerriesBowl } from "react-icons/gi";
               <Navbar bg="secondary" data-bs-theme="light">
                 <Container>
                 <Button variant="light">
-                  <Navbar.Brand href="/home" variant="light" > Bountiful Bowl <GiBerriesBowl color="red" size={35}/> </Navbar.Brand>
+                  <Navbar.Brand href="/home" variant="light" > Bountiful Bowl <GiBerriesBowl color="blue" size={35}/> </Navbar.Brand>
                   </Button>{' '}
                  
                   <Nav className="me-auto">
