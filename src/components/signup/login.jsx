@@ -96,7 +96,7 @@ const LogIn=()=>{
 
                 <Row xs={2} md={4} lg={6}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                <b><Form.Label>Email address</Form.Label></b>
+                <b><Form.Label className="label">Email address</Form.Label></b>
                 <Form.Control className="input2"
                 aria-label="Enter Your Email Address"
                 placeholder="Enter Your Email Address"
@@ -110,7 +110,7 @@ const LogIn=()=>{
 
                 <Row xs={2} md={4} lg={6}>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                <b><Form.Label>Password</Form.Label></b>
+                <b><Form.Label className="label">Password</Form.Label></b>
 
                 <Form.Control className="input2"
                 aria-label="Enter Your Password"
@@ -135,7 +135,7 @@ const LogIn=()=>{
 
 
                 <div>
-                <h6 className="hlogin">Already have an account? Just LogIn </h6>
+                <h6 className="label">Already have an account? Just LogIn </h6>
                 </div>
 
 

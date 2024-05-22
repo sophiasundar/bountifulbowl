@@ -17,10 +17,33 @@
   
 }
 
+.hall{
+  text-align: center;
+}
+
+.addtable{
+  display: flex;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 400px;
+  margin-right: 30px;
+  justify-content: space-between;
+}
+
+.label1{
+  margin-left: 70px;
+}
 @media (max-width: 768px) { 
   body {
-    background-color: lightpink; 
-  }
+    background-color: lightpink;
+    }
+    .hall{
+      text-align: center;
+      background-color: lightpink;
+    }
+    .logoutbtn{
+      height:90px;
+    }
 }
 .itemSpecs{
   margin-left: 10px;
@@ -102,7 +125,7 @@ border-radius: 10px;
   }
 
   .h3sign{
-    margin-left: -60px;
+    margin-left: 70px;
     margin-top: 70px;
     margin-bottom: -160px;
   }
@@ -115,7 +138,7 @@ border-radius: 10px;
 }
 
 .signbtn1{
-  margin-left: 20px;
+  margin-left: 70px;
 }
 
 .signbtn2{
@@ -127,7 +150,7 @@ border-radius: 10px;
   height: 40px;
   margin-top: 5px;
   border-radius: 5px;
-  margin-left: 10px;
+  margin-left: 70px;
   border-color: aliceblue;
 }
 
@@ -183,26 +206,10 @@ border-radius: 10px;
     width: 70px;
 }
 
-.hall{
-  margin-left: 400px;
-  margin-top: 25px;
-}
-
-
 .addbtn3{
   margin-left: 20px;
   margin-right: 20px;
 }
-
-.addtable{
-    display: flex;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: 400px;
-    margin-right: 30px;
-    justify-content: space-between;
-}
-
 
 .edbtn{
   display: flex;
@@ -212,4 +219,8 @@ border-radius: 10px;
 
 .ed{
   margin-right: 10px;
+}
+
+.label{
+  margin-left: 10px;
 }

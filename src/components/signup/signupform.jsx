@@ -87,7 +87,7 @@ const SignUpForm=()=>{
           <Row xs={2} md={4} lg={6}>
       <Form.Group className="mb-3" controlId="formBasicEmail" >
       
-        <b><Form.Label>Name</Form.Label></b>
+        <b><Form.Label className='label1'>Name</Form.Label></b>
      
       <Form.Control
                 aria-label="Enter Your Name"
@@ -102,7 +102,7 @@ const SignUpForm=()=>{
          <Row xs={2} md={4} lg={6}>
       <Form.Group className="mb-3" controlId="formBasicEmail" >
 
-        <b><Form.Label>Email address</Form.Label></b>
+        <b><Form.Label className='label1'>Email address</Form.Label></b>
       <Form.Control
                 aria-label="Enter Your Email Address"
                 aria-describedby="inputGroup-sizing-sm"
@@ -116,7 +116,7 @@ const SignUpForm=()=>{
           <Row xs={2} md={4} lg={6}>
       <Form.Group className="mb-3" controlId="formBasicPassword">
       
-        <b><Form.Label>Password</Form.Label></b>
+        <b><Form.Label className='label1'>Password</Form.Label></b>
         <Form.Control
                 aria-label="Enter Your Password"
                 aria-describedby="inputGroup-sizing-sm"
@@ -130,7 +130,7 @@ const SignUpForm=()=>{
       <Row xs={2} md={4} lg={6}>
       <Form.Group  className="mb-3" controlId="formBasicPassword">
          <div className='formlabel'>
-        <b><Form.Label>Role</Form.Label></b>
+        <b><Form.Label className='label1'>Role</Form.Label></b>
         </div>
 
         <Form.Select className='input' name="role" onChange={handleChange}
