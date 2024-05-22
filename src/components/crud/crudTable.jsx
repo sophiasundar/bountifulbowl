@@ -7,13 +7,15 @@ import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import Button from 'react-bootstrap/Button';
 import { IoMdPersonAdd } from "react-icons/io";
+import AddForm from "./addForm.jsx";
+
 
 
 
     function CrudTable(){
       const [tableData, setTableData] = useState([])
-      let rowNumber = 1;
-
+      const [showAddForm, setShowAddForm] = useState(false);
+    
       const getTable= () => {
           
         axios.get(`${API}/crud/foodlist`)
@@ -24,20 +26,57 @@ import { IoMdPersonAdd } from "react-icons/io";
             console.log(res.data);
             
           setTableData(res.data);
+          
             })
       };
 
         useEffect(()=>{
          getTable();
           
-        },[])
+        },[]);
+
+      
+
+       
+
+        const handleDelete = async (id) => {
+            try {
+              console.log('Deleting item:', id);
+              const response = await axios.delete(`${API}/crud/foodlist/${id}`);
+              if (response.status === 200) {
+                console.log('Record deleted successfully');
+                const updatedTableData = tableData.filter((item) => item.id !== id);
+                setTableData(updatedTableData); // Trigger re-render
+                
+              } else {
+                console.error('Deletion failed:', response.statusText);
+              }
+            } catch (error) {
+              console.error('Error during deletion:', error);
+            }
+       };
+
+       const handleAddForm = () => {
+        setShowAddForm(!showAddForm)
+       }
       
         return(
             <div >
                <NavBar/>
                <div className="addtable">
                <h3 >Manage Banquet Hall Details</h3>
-               <Button variant="primary" >Add Banquet hall <IoMdPersonAdd size={25} /> </Button>
+               <Button variant="primary" 
+                       onClick={handleAddForm}
+               >Add Banquet hall <IoMdPersonAdd size={25}/> 
+               </Button>
+               { showAddForm && 
+                    <AddForm 
+                    setTableData={setTableData} 
+                    showAddForm={showAddForm}
+                    onDataUpdated={() => { 
+                      getTable(); 
+                    }}
+               />}
                </div>
                   <Table striped bordered hover size="sm">
                     <thead>
@@ -55,9 +94,10 @@ import { IoMdPersonAdd } from "react-icons/io";
                       </tr>
                     </thead>
                     <tbody>
-                      {tableData.map((item)=>(
+                      {tableData.map((item, index)=>(
+
                       <tr key = {item.id}>
-                        <td>{rowNumber++}</td>
+                        <td>{index+1}</td>
                         <td>{item.hallname}</td>
                         <td>{item.name}</td>
                         <td> {item.address}</td>
@@ -66,12 +106,14 @@ import { IoMdPersonAdd } from "react-icons/io";
                         <td>{item.time}</td>
                         <td>{item.foodlist}</td>
                         <td>{item.foodquantity}</td>
-                        <td > <div className="edbtn"> <Button className="ed" variant="light" 
                         
-                        ><FaEdit color="green"/></Button> 
+                        <td > <div className="edbtn"> <Button className="ed" variant="light"
+                        ><FaEdit color="green"
+                             onClick={() =>{ console.log('Delete button clicked'); handleDelete(item.id)}}
+                        /></Button> 
 
                         <Button variant="light"
-                        
+                         
                         ><MdDelete color="red"/></Button> 
                         </div>    
                         

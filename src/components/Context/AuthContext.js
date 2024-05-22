@@ -11,6 +11,8 @@ const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [token, setToken] = useState('');
 
+ 
+  
   useEffect(() => {
     const storedToken = localStorage.getItem('auth-token');
     if (storedToken) {
@@ -18,6 +20,8 @@ const AuthProvider = ({ children }) => {
       setToken(storedToken);
     }
   }, []);
+
+  
 
   const handleSetToken = (newToken) => {
     localStorage.setItem('auth-token', newToken);
