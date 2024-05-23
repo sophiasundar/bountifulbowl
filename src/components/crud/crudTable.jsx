@@ -41,13 +41,11 @@ import AddForm from "./addForm.jsx";
 
         const handleDelete = async (id) => {
             try {
-              console.log('Deleting item:', id);
+              // console.log('Deleting item:', id);
               const response = await axios.delete(`${API}/crud/foodlist/${id}`);
               if (response.status === 200) {
+                setTableData(tableData.filter((item) => item.id !== id)); // Trigger re-render
                 console.log('Record deleted successfully');
-                const updatedTableData = tableData.filter((item) => item.id !== id);
-                setTableData(updatedTableData); // Trigger re-render
-                
               } else {
                 console.error('Deletion failed:', response.statusText);
               }
@@ -107,14 +105,20 @@ import AddForm from "./addForm.jsx";
                         <td>{item.foodlist}</td>
                         <td>{item.foodquantity}</td>
                         
-                        <td > <div className="edbtn"> <Button className="ed" variant="light"
-                        ><FaEdit color="green"
-                             onClick={() =>{ console.log('Delete button clicked'); handleDelete(item.id)}}
-                        /></Button> 
+                        <td > <div className="edbtn">
+                        <Button variant="light">
+                        <FaEdit color="green"
+                            
+                            />
+                          </Button>{' '}
+                           
 
                         <Button variant="light"
                          
-                        ><MdDelete color="red"/></Button> 
+                        > <MdDelete color="red"
+                        
+                        onClick={() =>{ console.log('Delete button clicked'); handleDelete(item.id)}}
+                        /></Button> 
                         </div>    
                         
                         </td>

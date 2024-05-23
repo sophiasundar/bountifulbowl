@@ -124,7 +124,7 @@ function BanquetCard({value, orphanageManagerId}){
             
                         <Button className="btn1" disabled={isLoading} onClick={handleClick}>
               {isLoading ? 'Sending...' : 'Agree'}
-                        agree
+                       
                     </Button>
                     {error && <p className="error">{error}</p>}
                 </Card.Body>
