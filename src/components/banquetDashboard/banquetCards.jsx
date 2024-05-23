@@ -22,7 +22,7 @@ function BanquetCard({value, orphanageManagerId}){
         setIsLoading(true);
         setError(null);
 
-        
+        const id = orphanageManagerId
     try {
       const managerResponse = await fetch(`${API}/orphinfo/${id}`); // Replace with your endpoint
       if (!managerResponse.ok) {

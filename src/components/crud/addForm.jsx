@@ -1,14 +1,14 @@
-import React, { useState, useContext} from 'react';
+import React, { useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { API } from '../global.js';
-import { AuthContext } from '../Context/AuthContext.js';
+// import { AuthContext } from '../Context/AuthContext.js';
 
 
 
 function AddForm({setTableData }){
-  const { isAuthenticated, token } = useContext(AuthContext)
+  // const { isAuthenticated, token } = useContext(AuthContext)
 
     const [hallname,setHallName] = useState("")
     const [name,setName] = useState("")
@@ -72,10 +72,10 @@ function AddForm({setTableData }){
         }
          setValidated(true);
 
-         if (!isAuthenticated) {
-          setValidated('Error: You are not authorized to add data.');
-          return; // Prevent submission if not authenticated
-        }
+        //  if (!isAuthenticated) {
+        //   setValidated('Error: You are not authorized to add data.');
+        //   return; // Prevent submission if not authenticated
+        // }
     
 
          fetch(`${API}/crud/foodlist`,{
@@ -83,7 +83,7 @@ function AddForm({setTableData }){
            body:JSON.stringify(newDetails),
            headers:{
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
+            //  Authorization: `Bearer ${token}`
            },
          }).then((data)=>data.json())
          .then((res)=>{

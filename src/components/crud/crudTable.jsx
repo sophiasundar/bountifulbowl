@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import {API} from '../global.js';
 import NavBar from "../navbar/navbar"
@@ -7,15 +8,16 @@ import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import Button from 'react-bootstrap/Button';
 import { IoMdPersonAdd } from "react-icons/io";
-import AddForm from "./addForm.jsx";
+
 
 
 
 
     function CrudTable(){
       const [tableData, setTableData] = useState([])
-      const [showAddForm, setShowAddForm] = useState(false);
+      
     
+      const navigate = useNavigate()
       const getTable= () => {
           
         axios.get(`${API}/crud/foodlist`)
@@ -44,7 +46,7 @@ import AddForm from "./addForm.jsx";
               // console.log('Deleting item:', id);
               const response = await axios.delete(`${API}/crud/foodlist/${id}`);
               if (response.status === 200) {
-                setTableData(tableData.filter((item) => item.id !== id)); // Trigger re-render
+                setTableData(tableData.filter((item) => item.id !== id)); 
                 console.log('Record deleted successfully');
               } else {
                 console.error('Deletion failed:', response.statusText);
@@ -54,27 +56,25 @@ import AddForm from "./addForm.jsx";
             }
        };
 
-       const handleAddForm = () => {
-        setShowAddForm(!showAddForm)
-       }
+      //  const handleAddForm = () => {
+      //   setShowAddForm(!showAddForm)
+      //  }
       
         return(
             <div >
                <NavBar/>
                <div className="addtable">
                <h3 >Manage Banquet Hall Details</h3>
+
+              {/* add banquet hall button */}
                <Button variant="primary" 
-                       onClick={handleAddForm}
+                       onClick={()=>{
+                        navigate('/addform')
+                      }}
                >Add Banquet hall <IoMdPersonAdd size={25}/> 
                </Button>
-               { showAddForm && 
-                    <AddForm 
-                    setTableData={setTableData} 
-                    showAddForm={showAddForm}
-                    onDataUpdated={() => { 
-                      getTable(); 
-                    }}
-               />}
+
+
                </div>
                   <Table striped bordered hover size="sm">
                     <thead>
@@ -94,7 +94,7 @@ import AddForm from "./addForm.jsx";
                     <tbody>
                       {tableData.map((item, index)=>(
 
-                      <tr key = {item.id}>
+                      <tr key = {item._id}>
                         <td>{index+1}</td>
                         <td>{item.hallname}</td>
                         <td>{item.name}</td>
@@ -108,7 +108,9 @@ import AddForm from "./addForm.jsx";
                         <td > <div className="edbtn">
                         <Button variant="light">
                         <FaEdit color="green"
-                            
+                             onClick={()=>{
+                              navigate(`/editform/${item._id}`)
+                            }}
                             />
                           </Button>{' '}
                            
@@ -117,7 +119,7 @@ import AddForm from "./addForm.jsx";
                          
                         > <MdDelete color="red"
                         
-                        onClick={() =>{ console.log('Delete button clicked'); handleDelete(item.id)}}
+                        onClick={() =>{ console.log('Delete button clicked'); handleDelete(item._id)}}
                         /></Button> 
                         </div>    
                         
