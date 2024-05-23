@@ -1,4 +1,6 @@
 import { Navigate } from "react-router-dom";
+import React from 'react';
+// import { AuthContext } from "./Context/AuthContext";
 
 export function ProtectedRoute({ children }){
     const authToken = localStorage.getItem("x-auth-token");
@@ -12,3 +14,15 @@ export function ProtectedRoute({ children }){
         return <Navigate replace to= '/' />
     }
 }
+
+// export function ProtectedRoute({ children }) {
+//     const { isAuthenticated } = useContext(AuthContext); // Access token through context
+  
+//     if (!isAuthenticated) {
+//       return <Navigate replace to='/' />;
+//     }
+  
+//     return <>
+//       {children}
+//     </>
+//   }

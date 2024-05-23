@@ -6,6 +6,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Figure from 'react-bootstrap/Figure';
 import { API } from '../global.js'
+import { AuthProvider } from "../Context/AuthContext.js";
+
 
 const LogIn=()=>{
 
@@ -43,7 +45,8 @@ const LogIn=()=>{
         
             setValidated(true);
         
-        try{
+        
+            try{
               const response = await fetch(`${API}/users/login`,{
                 method: "POST",
                 body: JSON.stringify(data),
@@ -68,10 +71,16 @@ const LogIn=()=>{
         }
 
 
+
+
+          
+
+
       };
 
       return(
         <>
+            <AuthProvider>
            <div className="scontainer">
 
                 <div className="form">
@@ -170,7 +179,7 @@ const LogIn=()=>{
                 </div>
 
                 </div>
-
+                </AuthProvider>
 
         </>
       )

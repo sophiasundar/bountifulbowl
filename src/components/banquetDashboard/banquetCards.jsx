@@ -5,6 +5,7 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { MdFoodBank } from "react-icons/md";
 import { API } from '../global';
+import { AuthProvider } from '../Context/AuthContext';
 
 
 function BanquetCard({value, orphanageManagerId}){
@@ -66,7 +67,7 @@ function BanquetCard({value, orphanageManagerId}){
 
     return(
         <>
-        
+         <AuthProvider>
         <div className='cardContainer' >
 
             
@@ -133,7 +134,7 @@ function BanquetCard({value, orphanageManagerId}){
 
         </div>
 
-
+        </AuthProvider>
         </>
     )
 }

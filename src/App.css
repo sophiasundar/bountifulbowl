@@ -131,13 +131,13 @@ border-radius: 10px;
 
   .h3sign{
     margin-left: 70px;
-    margin-top: 70px;
-    margin-bottom: -160px;
+    margin-top: 100px;
+    margin-bottom: -120px;
   }
 
   
 .signbtn{
-  margin-top: 10px;
+  margin-top: 5px;
   margin-left: 80px;
   margin-bottom: 80px;
 }
@@ -235,9 +235,7 @@ border-radius: 10px;
   
   width: 400px;
 }
-.mb-3{
-  margin-top: 20px;
-}
+
 
 .editform{
   justify-content: center;
