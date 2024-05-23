@@ -33,6 +33,7 @@
 .label1{
   margin-left: 70px;
 }
+
 @media (max-width: 768px) { 
   body {
     background-color: lightpink;
@@ -43,6 +44,10 @@
     }
     .logoutbtn{
       height:90px;
+    }
+    .editform{
+      justify-content: center;
+      margin-right: 40px;
     }
 }
 .itemSpecs{
@@ -223,4 +228,33 @@ border-radius: 10px;
 
 .label{
   margin-left: 10px;
+}
+
+
+.input3{
+  
+  width: 400px;
+}
+.mb-3{
+  margin-top: 20px;
+}
+
+.editform{
+  justify-content: center;
+  margin-right: 20px;
+  
+}
+
+.addbtn{
+ 
+ justify-content: space-between ;
+}
+
+.addbtn1{
+    margin-left: 70px;
+    
+}
+
+.addbtn2{
+  margin-left: 40px ;
 }

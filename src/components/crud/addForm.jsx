@@ -94,16 +94,16 @@ function AddForm({setTableData }){
     }
 
     return(
-        <div>
+        <div className='editform'>
              
              <Form>
 
-              <h4 className='titleform' >Add Banquet Hall</h4>
+              <h4 className='hall' >Add Banquet Hall</h4>
 
                 <h4 className="valid" >{validated}</h4>
                     <Form.Group className="mb-3" controlId="hallname">
-                        <Form.Label>Hall Name :</Form.Label>
-                        <Form.Control className='ph1' type="text" placeholder="Enter The Hall Name"
+                        <Form.Label className="lab">Hall Name :</Form.Label>
+                        <Form.Control className='input3' type="text" placeholder="Enter The Hall Name"
                               value={hallname}
                               onChange={(e)=>
                                 {setHallName(e.target.value)}
@@ -113,7 +113,7 @@ function AddForm({setTableData }){
 
                     <Form.Group className="mb-3" controlId="name">
                         <Form.Label>Name :</Form.Label>
-                        <Form.Control className='ph2' type="text" placeholder="Enter The Name" 
+                        <Form.Control className="lab" type="text" placeholder="Enter The Name" 
                              value={name}
                              onChange={(e)=>{
                                setName(e.target.value)
@@ -123,7 +123,7 @@ function AddForm({setTableData }){
 
                     <Form.Group className="mb-3" controlId="address">
                         <Form.Label>Address :</Form.Label>
-                        <Form.Control className='ph3' type="text" placeholder="Enter The Address" 
+                        <Form.Control className="lab" type="text" placeholder="Enter The Address" 
                             value={address}
                             onChange={(e)=>{
                               setAddress(e.target.value)
@@ -133,7 +133,7 @@ function AddForm({setTableData }){
 
                     <Form.Group className="mb-3" controlId="email">
                         <Form.Label>Email :</Form.Label>
-                        <Form.Control className='ph1' type="text" placeholder="Enter The Email"
+                        <Form.Control className="lab" type="text" placeholder="Enter The Email"
                               value={email}
                               onChange={(e)=>
                                 {setEmail(e.target.value)}
@@ -143,7 +143,7 @@ function AddForm({setTableData }){
 
                     <Form.Group className="mb-3" controlId="date">
                         <Form.Label>Food Takein Date :</Form.Label>
-                        <Form.Control className='ph8' type="text" placeholder="Enter The Food Takein Date" 
+                        <Form.Control className="lab" type="text" placeholder="Enter The Food Takein Date" 
                              value={date}
                              onChange={(e)=>{
                                setDate(e.target.value)
@@ -153,7 +153,7 @@ function AddForm({setTableData }){
 
                     <Form.Group className="mb-3" controlId="time">
                         <Form.Label>Food Takein Time :</Form.Label>
-                        <Form.Control className='ph5' type="text" placeholder="Enter The Food Takein Time" 
+                        <Form.Control className="lab" type="text" placeholder="Enter The Food Takein Time" 
                               value={time}
                               onChange={(e)=>{
                                 setTime(e.target.value)
@@ -163,7 +163,7 @@ function AddForm({setTableData }){
 
                     <Form.Group className="mb-3" controlId="foodlist">
                         <Form.Label>Foodlist :</Form.Label>
-                        <Form.Control  className='ph6' type="text" placeholder="Enter The Foodlist" 
+                        <Form.Control  className="lab" type="text" placeholder="Enter The Foodlist" 
                               value={foodlist}
                               onChange={(e)=>{
                                 setFoodlist(e.target.value)
@@ -173,7 +173,7 @@ function AddForm({setTableData }){
 
                     <Form.Group className="mb-3" controlId="food quantity">
                         <Form.Label>Food Quantity :</Form.Label>
-                        <Form.Control className='ph7' type="text" placeholder="Enter The Food Quantity" 
+                        <Form.Control className="lab" type="text" placeholder="Enter The Food Quantity" 
                             value={foodquantity}
                             onChange={(e)=>{
                               setFoodQuantity(e.target.value)
@@ -189,7 +189,7 @@ function AddForm({setTableData }){
                     <Button  className='addbtn1' variant="primary"
                                 onClick={handleSubmit}
                     >
-                        Add Banquet Hall
+                        Add BanquetHall
                     </Button>
 
                     <Button className='addbtn2' variant="primary"
