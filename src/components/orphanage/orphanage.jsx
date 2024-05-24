@@ -12,7 +12,7 @@ import OrphCard from "./orphanageCards.jsx";
 
     const getOrphInfo = () => {
           
-        axios.get(`${API}/orphinfo/`)
+        axios.get(`${API}/orphinfo`)
         .then((res)=>{
             if(res.status === 401){
                 console.log(" Data Not Found ! ")
