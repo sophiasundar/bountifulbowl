@@ -25,7 +25,7 @@ function BanquetCard({value, orphanageManagerId}){
 
         const id = orphanageManagerId
     try {
-      const managerResponse = await fetch(`${API}/orphinfo/${id}`); // Replace with your endpoint
+      const managerResponse = await fetch(`${API}/orphinfo/${id}`); 
       if (!managerResponse.ok) {
         throw new Error('Error fetching orphanage manager ID');
       }

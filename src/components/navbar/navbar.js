@@ -4,12 +4,20 @@ import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
 import { GiBerriesBowl } from "react-icons/gi";
-
+import React from 'react';
 
 
     function NavBar(){
        const navigate = useNavigate()
-        return(
+      
+        
+       const handleLogout = () =>{
+             localStorage.removeItem('x-auth-token')
+             alert('Successfully LoggedOut')
+             navigate('/')
+       } 
+       
+       return(
             <>
               <Navbar bg="secondary" data-bs-theme="light">
                 <Container>
@@ -42,8 +50,8 @@ import { GiBerriesBowl } from "react-icons/gi";
                         CRUD Page
                     </Button>
                    
-                  <Button variant="dark" className='logoutbtn'  size="sm" ><Nav.Link href="/"
-                            
+                  <Button variant="dark" className='logoutbtn'  size="sm" ><Nav.Link href=""
+                            onClick={handleLogout}
                   ><b>Log Out</b></Nav.Link></Button>{' '}
                   
                   </Nav>

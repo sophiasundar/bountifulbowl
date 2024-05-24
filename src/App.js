@@ -34,14 +34,30 @@ function App() {
       </ProtectedRoute>
       }></Route>
 
-      <Route path='/orphanagedashboard' element={<OrphanInfo/>}></Route>
+      <Route path='/orphanagedashboard' element={
+        <ProtectedRoute>
+      <OrphanInfo/>
+      </ProtectedRoute>
+      }></Route>
 
-      <Route path='/banquetcrud' element = {<CrudTable/>}></Route>
+      <Route path='/banquetcrud' element = {
+        <ProtectedRoute>
+      <CrudTable/>
+      </ProtectedRoute>
+      }></Route>
 
-      <Route path='/addform' element = {<AddForm tableData={tableData} setTableData={setTableData}/>}></Route>
+      <Route path='/addform' element = {
+         <ProtectedRoute>
+      <AddForm tableData={tableData} setTableData={setTableData}/>
+      </ProtectedRoute>
+      }></Route>
 
-      <Route path='/editform/:id' element = {<EditForm tableData={tableData} setTableData={setTableData}/>}></Route>
-
+      <Route path='/editform/:id' element = {
+      <ProtectedRoute>
+      <EditForm tableData={tableData} setTableData={setTableData}/>
+      </ProtectedRoute>
+      }></Route>
+       
       </Routes>
       
       </BrowserRouter>
