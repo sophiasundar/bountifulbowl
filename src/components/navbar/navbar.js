@@ -33,6 +33,14 @@ import { GiBerriesBowl } from "react-icons/gi";
                     >
                         Orphanage Info
                     </Button>
+
+                    <Button className='addbtn4' variant="primary"
+                                onClick={()=>{
+                                  navigate('/banquetcrud')
+                                }}
+                    >
+                        CRUD Page
+                    </Button>
                    
                   <Button variant="dark" className='logoutbtn'  size="sm" ><Nav.Link href="/"
                             
