@@ -1,73 +1,27 @@
-import {useState} from 'react';
-import React from 'react';
+
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { MdFoodBank } from "react-icons/md";
-import { API } from '../global';
-import { AuthProvider } from '../Context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+// import { AuthProvider } from '../Context/AuthContext';
 
 
-function BanquetCard({value, orphanageManagerId}){
-    const [show,setShow] = useState(false);
-    const [isLoading,setIsLoading] = useState(false);
-    const  [error, setError] = useState(null);
+function BanquetCard({ value }){
+    
+    const [selected, setSelected] = useState(false);
+    const navigate = useNavigate()
 
-    const toggleSummary ={
-        display:show?"block":"none"
-    }
-
-    console.log(toggleSummary.display);
-
-    const handleClick = async () => {
-        setIsLoading(true);
-        setError(null);
-
-        const id = orphanageManagerId
-    try {
-      const managerResponse = await fetch(`${API}/orphinfo/${id}`); 
-      if (!managerResponse.ok) {
-        throw new Error('Error fetching orphanage manager ID');
-      }
-      const managerData = await managerResponse.json();
-      orphanageManagerId = managerData.id;
-    } catch (error) {
-      console.error('Error fetching orphanage manager ID:', error);
-      setError(error.message);
-      setIsLoading(false);
-      return;
+    const handleClick = () =>{
+        setSelected(true);
     }
     
-        try {
-          const response = await fetch(`${API}/agree/`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              banquetDetailsId: value._id, 
-              orphanageManagerId, 
-            }),
-          });
-    
-          if (!response.ok) {
-            throw new Error('Error sending email');
-          }
-    
-          console.log('Email sent successfully!');
-         
-        } catch (error) {
-          console.error('Error sending email:', error);
-          setError(error.message);
-        } finally {
-          setIsLoading(false);
-        }
-      };
-
-
     return(
         <>
-         <AuthProvider>
+         {/* <AuthProvider> */}
+
+         <div className={`banquet-card ${selected ? 'selected' : ''}`} onClick={handleClick} >
         <div className='cardContainer' >
 
             
@@ -84,57 +38,47 @@ function BanquetCard({value, orphanageManagerId}){
                             <ListGroup.Item><b>Email : </b> {value.email}</ListGroup.Item>
                             <ListGroup.Item><b>Date Of Food Takein</b> {value.date}</ListGroup.Item>
                             <ListGroup.Item><b>Time Of Food Takein</b> {value.time} </ListGroup.Item>
-                            <div className='bluebtn'>
-                            <div >
-                            <button
-                                onClick={()=>{
-                                    setShow(!show)
-                                    console.log(show)
-                                }}
-                            >  {  show?"🔽":"🔼"}
-                            </button> 
-                        </div>
-                        { show? <div  >
-                        <ListGroup className="list-group-flush" >
                             <ListGroup.Item><b>Food List</b> {value.foodlist} </ListGroup.Item>
+                            {selected && (
+                            <ListGroup.Item className='quantity'> {value.foodquantity}</ListGroup.Item>
+                            )}
+
+                            <div >
                             
-                            </ListGroup>
-                            </div>
-                            :null}
-                             <div  >
-                            <button
-                                onClick={()=>{
-                                    setShow(!show)
-                                    console.log(show)
-                                }}
-                            >  {  show?"🔽":"🔼"}
-                            </button> 
-                        </div>
-                            { show? <div  >
-                        <ListGroup className="list-group-flush" >
                             
-                            <ListGroup.Item className='quantity'><b>Quantity:</b> {value.foodquantity}</ListGroup.Item>
-                            </ListGroup>
-                            </div>
-                            :null}
-                          </div>
+                        
+                            
+                           
+ 
+                    <Card.Body className='list'>
+                    
+                  
+                    
+                    <Button className='btn1' variant='primary'
+                       onClick={()=>{
+                        navigate(`/sendemail/`)
+                      }}
+                    >
+                     Send Email       
+                    
+                </Button>
+                <p className="takein">Note: Check the Given time and take the food before get wasted</p>
+            </Card.Body>
+      
+                            
+                             
+                       </div>     
+                          
                 </ListGroup>
 
-               <Card.Body className='list'>
-                    
-            
-                        <Button className="btn1" disabled={isLoading} onClick={handleClick}>
-              {isLoading ? 'Sending...' : 'Agree'}
-                       
-                    </Button>
-                    {error && <p className="error">{error}</p>}
-                </Card.Body>
+               
 
         </Card>
 
         </div>
+        </div>
 
-        </AuthProvider>
+        {/* </AuthProvider> */}
         </>
     )
 }

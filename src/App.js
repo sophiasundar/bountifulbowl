@@ -9,6 +9,7 @@ import CrudTable from './components/crud/crudTable';
 import AddForm from './components/crud/addForm';
 import { EditForm } from './components/crud/editForm';
 import { ProtectedRoute } from './components/protectedRoute';
+import SendEmail from './components/banquetDashboard/sendEmail';
 
 
 
@@ -55,6 +56,12 @@ function App() {
       <Route path='/editform/:id' element = {
       <ProtectedRoute>
       <EditForm tableData={tableData} setTableData={setTableData}/>
+      </ProtectedRoute>
+      }></Route>
+
+     <Route path='/sendemail/' element = {
+      <ProtectedRoute>
+      <SendEmail/>
       </ProtectedRoute>
       }></Route>
        

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import { API } from "../global.js";
 import BanquetCard from "./banquetCards.jsx";
-import NavBar from "../navbar/navbar"
+import NavBar from "../navbar/navbar";
 
 
 
@@ -38,6 +38,7 @@ import NavBar from "../navbar/navbar"
          <NavBar/>
         
          <h3 className='hall'>Banquet Hall Details</h3>
+         <p className='hall'>Description</p>
 
          {
             banquetData.map((item)=>{
