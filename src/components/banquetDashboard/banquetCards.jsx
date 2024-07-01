@@ -56,7 +56,7 @@ function BanquetCard({ value }){
                     
                     <Button className='btn1' variant='primary'
                        onClick={()=>{
-                        navigate(`/sendemail/`)
+                        navigate(`/sendemail`)
                       }}
                     >
                      Send Email       

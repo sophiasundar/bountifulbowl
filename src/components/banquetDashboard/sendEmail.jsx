@@ -1,5 +1,5 @@
 import Form from 'react-bootstrap/Form';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { API } from '../global';
 import Button from 'react-bootstrap/Button';
 
@@ -7,28 +7,45 @@ import Button from 'react-bootstrap/Button';
 
 function SendEmail(){
     const [name,setName] = useState('');
-    const [orphanageName, setOrphanageName] = useState('');
+    const [orphanagename, setOrphanageName] = useState('');
     const [email, setEmail] = useState('');
     const [address, setAddress] = useState('');
     const [banquetname, setBanquetName] = useState('');
     const [banmanagername, setBanManagerName] = useState('');
-    const [banquetemail, setBanquetEmail] = useState('');
-   
+    const [banquetemails, setBanquetEmails] = useState([]);
+    const [selectedBanquetEmail, setSelectedBanquetEmail] = useState('');
+
+
 
     const [validated, setValidated] = useState(false);
-
+         
+       useEffect(()=>{
+            const getemails = async ()=>{
+              try{
+                const res = await fetch(`${API}/banquet/`);
+                if(!res.ok){
+                  throw new Error('Error fetching emails');
+                }
+                const data = await res.json();
+                setBanquetEmails(data);
+              }catch(error){
+                 console.error('Error fetching emails:',error);
+              }
+            };
+            getemails();
+       }, [])
 
     const handleSubmit = async (e) => {
         
-
+      
         const newEmail ={
           name : name,
-          orphanageName : orphanageName,
+          orphanagename : orphanagename,
           email : email,
           address : address,
           banquetname: banquetname,
           banmanagername: banmanagername,
-          banquetemail: banquetemail
+          banquetemails: selectedBanquetEmail
         }
 
         console.log(newEmail)
@@ -42,7 +59,7 @@ function SendEmail(){
        }else if(newEmail.email === "" ){
           setValidated("VALID: Email is Required and Valid");
           return;
-       }else if(newEmail.orphanageName === ""){
+       }else if(newEmail.orphanagename === ""){
           setValidated("VALID: orphanageName is required");
           return; 
        }else if(newEmail.banquetname === ""){
@@ -51,8 +68,8 @@ function SendEmail(){
        }else if(newEmail.banmanagername === ""){
           setValidated("VALID: Banquet ManagerName is required");
           return; 
-       }else if(newEmail.banquetemail === ""){
-        setValidated("VALID: Banquet Email is required");
+       }else if(newEmail.selectedBanquetEmail === ""){
+        setValidated("VALID: Select a Banquet Email is required");
         return; 
        }else{
           setValidated("")
@@ -67,7 +84,7 @@ function SendEmail(){
 
             try {
 
-                const response = await fetch(`${API}/sendemail/`, {
+                const response = await fetch(`${API}/sendemail`, {
                   method: 'POST',
                   headers: {
                     'Content-Type': 'application/json',
@@ -75,7 +92,7 @@ function SendEmail(){
                   body: JSON.stringify({
                     newEmail
                   }),
-                  
+                 
                 });
 
 
@@ -85,7 +102,7 @@ function SendEmail(){
                   }
             
                   console.log('Email sent successfully!');
-                 
+                   
                 } catch (error) {
                   console.error('Error sending email:', error);
                   
@@ -101,7 +118,7 @@ function SendEmail(){
                             <Form.Group className="mb-3" controlId="hallname">
                         <Form.Label >Orphanage Name :</Form.Label>
                         <Form.Control  type="text" placeholder="Enter The Orphanage Name"
-                              value={orphanageName}
+                              value={orphanagename}
                               onChange={(e)=>
                                 {setOrphanageName(e.target.value)}
                               }    
@@ -130,7 +147,7 @@ function SendEmail(){
 
                     <Form.Group className="mb-3" controlId="email">
                         <Form.Label>Email :</Form.Label>
-                        <Form.Control  type="text" placeholder="Enter The Email"
+                        <Form.Control  type="email" placeholder="Enter The Email"
                               value={email}
                               onChange={(e)=>
                                 {setEmail(e.target.value)}
@@ -158,14 +175,26 @@ function SendEmail(){
                         />
                     </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="name">
-                        <Form.Label>Banquet Email :</Form.Label>
-                        <Form.Control  type="text" placeholder="Enter The Manager Name"
+                    <Form.Group className="mb-3" controlId="email">
+                       
+                        {/* <Form.Control  type="email" placeholder="Enter The Manager Email"
                               value={banquetemail}
                               onChange={(e)=>
                                 {setBanquetEmail(e.target.value)}
                               }    
-                        />
+                        /> */}
+                         <Form.Label>Banquet Email :</Form.Label>
+                         <Form.Select aria-label="Default select example"
+                              value={selectedBanquetEmail}
+                              onChange={(e)=>
+                                {setSelectedBanquetEmail(e.target.value)}
+                              } 
+                         >
+                          <option value=''>Select Banquet Email</option>
+                              {banquetemails.map((email)=>(
+                          <option key={email} value={email}>{email}</option>
+                        ))}
+                        </Form.Select>
                     </Form.Group>
 
                    <Button className="btn1" type='submit' onClick={handleSubmit}>
