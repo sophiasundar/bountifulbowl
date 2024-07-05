@@ -8,12 +8,12 @@ import Figure from 'react-bootstrap/Figure';
 import { API } from '../global.js'
 import { AuthProvider } from "../Context/AuthContext.js";
 
-
 const LogIn=()=>{
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [state,setState] = useState('login')
+    const [state,setState] = useState('login');
+    const [userRole, setUserRole] = useState(null);
     const [validated,setValidated] = useState(false);
     const navigate = useNavigate();
 
@@ -52,21 +52,26 @@ const LogIn=()=>{
                 body: JSON.stringify(data),
                 headers: {
                   "Content-Type": "application/json",
-            }   
+                }   
         })
+
+       
           let datum = await response.json()
           if(response.ok){
             console.log(datum);
             const authToken = localStorage.setItem("x-auth-token",datum.token);
+             localStorage.setItem("user-role",datum.role);
+            setUserRole(datum.role); 
             console.log("localStorage", authToken);
+            console.log("localStorage", userRole)
              alert('Successfully LoggedIn')
              navigate("/banquetdashboard");
           } else {
             alert('Invalid Credentials')
             navigate("/");
          }
-        }catch(err){
-            console.log("err");
+        }catch(error){
+            console.error("Login failed!", error);
             setState("");
         }
 

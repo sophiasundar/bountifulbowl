@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter,Routes, Route } from "react-router-dom";
-import { useState } from 'react';
+import {  useState } from 'react';
 import LogIn from './components/signup/login';
 import SignUpForm from './components/signup/signupform';
 import Banquet from './components/banquetDashboard/banquet';
@@ -8,18 +8,21 @@ import OrphanInfo from './components/orphanage/orphanage';
 import CrudTable from './components/crud/crudTable';
 import AddForm from './components/crud/addForm';
 import { EditForm } from './components/crud/editForm';
-import { ProtectedRoute } from './components/protectedRoute';
 import SendEmail from './components/banquetDashboard/sendEmail';
+import {  AuthProvider } from './components/Context/AuthContext';
+import { ProtectedRoute } from './components/protectedRoute.jsx';
+
 
 
 
 function App() {
-  // const [banquetData, setBanquetData] = useState([])
+  // const { user, login } = useContext(AuthContext)
   const [tableData, setTableData] = useState([])
 
+  
   return (
     <div className="App">
-      
+      <AuthProvider>
       <BrowserRouter>
 
       <Routes>
@@ -30,37 +33,37 @@ function App() {
       
        
       <Route path='/banquetdashboard' element={
-         <ProtectedRoute>
+         <ProtectedRoute requiredRoles={['Banquet-Manager','orphanage-manager']}>
       <Banquet/>
       </ProtectedRoute>
       }></Route>
 
       <Route path='/orphanagedashboard' element={
-        <ProtectedRoute>
+        <ProtectedRoute requiredRoles={['Banquet-Manager','orphanage-manager']} >
       <OrphanInfo/>
       </ProtectedRoute>
       }></Route>
 
       <Route path='/banquetcrud' element = {
-        <ProtectedRoute>
+        <ProtectedRoute requiredRoles={['Banquet-Manager']} >
       <CrudTable/>
       </ProtectedRoute>
       }></Route>
 
       <Route path='/addform' element = {
-         <ProtectedRoute>
+         <ProtectedRoute requiredRoles={['Banquet-Manager']} >
       <AddForm tableData={tableData} setTableData={setTableData}/>
       </ProtectedRoute>
       }></Route>
 
       <Route path='/editform/:id' element = {
-      <ProtectedRoute>
+      <ProtectedRoute requiredRoles={['Banquet-Manager']} >
       <EditForm tableData={tableData} setTableData={setTableData}/>
       </ProtectedRoute>
       }></Route>
 
      <Route path='/sendemail' element = {
-      <ProtectedRoute>
+      <ProtectedRoute  >
       <SendEmail/>
       </ProtectedRoute>
       }></Route>
@@ -69,7 +72,7 @@ function App() {
       
       </BrowserRouter>
        
-
+      </AuthProvider>
     </div>
   );
 }

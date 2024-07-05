@@ -6,10 +6,12 @@ import { useNavigate } from 'react-router-dom';
 import { GiBerriesBowl } from "react-icons/gi";
 import React from 'react';
 
+ 
 
     function NavBar(){
        const navigate = useNavigate()
-      
+       
+       
         
        const handleLogout = () =>{
              localStorage.removeItem('x-auth-token')
@@ -49,10 +51,12 @@ import React from 'react';
                     >
                         CRUD Page
                     </Button>
-                   
-                  <Button variant="dark" className='logoutbtn'  size="sm" ><Nav.Link href=""
+                  <Button variant="dark" className='logoutbtn'  size="sm" >
+                    <Nav.Link href=""
                             onClick={handleLogout}
-                  ><b>Log Out</b></Nav.Link></Button>{' '}
+                  ><b>Log Out</b></Nav.Link>
+                  </Button>
+                  
                   
                   </Nav>
                 </Container>
