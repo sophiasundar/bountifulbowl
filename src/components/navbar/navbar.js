@@ -15,6 +15,7 @@ import React from 'react';
         
        const handleLogout = () =>{
              localStorage.removeItem('x-auth-token')
+             localStorage.removeItem('user-role')
              alert('Successfully LoggedOut')
              navigate('/')
        } 

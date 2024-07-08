@@ -10,17 +10,26 @@ import OrphCard from "./orphanageCards.jsx";
    function OrphanInfo(){
     const [ orphData, setOrphData] = useState([])
 
-    const getOrphInfo = () => {
-          
-        axios.get(`${API}/orphinfo`)
-        .then((res)=>{
-            if(res.status === 401){
-                console.log(" Data Not Found ! ")
-            }
-            console.log(res.data);
-            
-          setOrphData(res.data);
-            })
+    const getOrphInfo = async () => {
+          try{
+            const token = localStorage.getItem('x-auth-token');
+            const res = await axios.get(`${API}/orphinfo`,{
+                headers:{
+                  Authorization: 'Bearer ' + token 
+                }
+              });
+              
+              if(res.status === 200){
+                console.log('Orphanage data fetched successfully');
+                setOrphData(res.data);
+            } else if (res.status === 401){
+              console.log(" Unauthorized access. Please login again.")
+          }
+
+          }catch(error){
+            console.error('Error fetching data:', error);
+          }
+        
       };
 
         useEffect(()=>{

@@ -11,6 +11,8 @@ import { EditForm } from './components/crud/editForm';
 import SendEmail from './components/banquetDashboard/sendEmail';
 import {  AuthProvider } from './components/Context/AuthContext';
 import { ProtectedRoute } from './components/protectedRoute.jsx';
+import { Authorise } from './components/authorise.jsx';
+
 
 
 
@@ -30,34 +32,34 @@ function App() {
       <Route path='/' element={ <LogIn/> }></Route>
       <Route path='/signup' element={ <SignUpForm/>}></Route>
 
-      
+      <Route path='/notauthorise' element={ <Authorise/>}></Route>
        
       <Route path='/banquetdashboard' element={
-         <ProtectedRoute requiredRoles={['Banquet-Manager','orphanage-manager']}>
-      <Banquet/>
+         <ProtectedRoute allowedRoles={['Banquet-Manager','orphanage-manager']}>
+            <Banquet/>
       </ProtectedRoute>
       }></Route>
 
       <Route path='/orphanagedashboard' element={
-        <ProtectedRoute requiredRoles={['Banquet-Manager','orphanage-manager']} >
+        <ProtectedRoute allowedRoles={['Banquet-Manager','orphanage-manager']} >
       <OrphanInfo/>
       </ProtectedRoute>
       }></Route>
 
       <Route path='/banquetcrud' element = {
-        <ProtectedRoute requiredRoles={['Banquet-Manager']} >
+        <ProtectedRoute allowedRoles={['Banquet-Manager']} >
       <CrudTable/>
       </ProtectedRoute>
       }></Route>
 
       <Route path='/addform' element = {
-         <ProtectedRoute requiredRoles={['Banquet-Manager']} >
+         <ProtectedRoute allowedRoles={['Banquet-Manager']} >
       <AddForm tableData={tableData} setTableData={setTableData}/>
       </ProtectedRoute>
       }></Route>
 
       <Route path='/editform/:id' element = {
-      <ProtectedRoute requiredRoles={['Banquet-Manager']} >
+      <ProtectedRoute allowedRoles={['Banquet-Manager']} >
       <EditForm tableData={tableData} setTableData={setTableData}/>
       </ProtectedRoute>
       }></Route>
@@ -67,7 +69,9 @@ function App() {
       <SendEmail/>
       </ProtectedRoute>
       }></Route>
-       
+
+
+
       </Routes>
       
       </BrowserRouter>

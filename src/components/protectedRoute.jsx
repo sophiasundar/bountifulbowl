@@ -1,63 +1,69 @@
 import { Navigate } from "react-router-dom";
-import React, { useEffect, useState } from 'react';
-import { API } from './global.js'
+import React, { useContext } from 'react';
+// import { API } from './global.js'
+import { AuthContext } from "./Context/AuthContext.js";
 
-export function ProtectedRoute({ children, requiredRoles }){
-     const [authToken , setAuthToken] = useState(localStorage.getItem("x-auth-token"))
-     const userRole = localStorage.getItem("user-role");
-     const [role,setRole] = useState(userRole);
-          
-     useEffect(()=>{
-          const fetchUserRole = async () =>{
-             if(authToken){
-                try{
-                    const response = await fetch(`${API}/users/login`,{
-                        method: "POST",
-                          body: JSON.stringify(data),
-                         headers: {
-                            Authorization: `Bearer ${authToken}`,
-                        }   
-                });
+export function ProtectedRoute({ children, allowedRoles }){
+      const { isAuthenticated, role } = useContext(AuthContext);
 
-                     if(!response.ok){
-                        throw new Error('Falied to fetch user role');
-                     } 
-                     const data = await response.json();
-                     setRole(localStorage.getItem("user-role"))
-                     setAuthToken(data.token)
-                }catch(error){
-                    console.log('Error fetching user role:', error);
-                }
-             }
-             };
-             fetchUserRole();
+      console.log('isAuthenticated:', isAuthenticated);
+  console.log('role:', role);
+      
+      if(!isAuthenticated){
+         return <Navigate to= '/' replace />;
+      }
 
-     }, [authToken]);
+      if(!allowedRoles.includes(role)){
+          return <Navigate to='/notauthorise' replace/>
+      }
+
+      return <>
+           {children}
+      </>
+         
+   //   const [authToken , setAuthToken] = useState(localStorage.getItem("x-auth-token"));
+   //   const [userRole,setUserRole] = useState(localStorage.getItem("user-role"));
      
-     if(!authToken){
-          return <Navigate replace to= '/' />;
-     }
 
-     if(!role || !requiredRoles.includes(role)){
-        return <Navigate replace to= '/unauthorized' />;
-     }
+   //   useEffect(()=>{
+   //        const fetchUserRole = async () =>{
+   //           if(authToken){
+   //              try{
+   //                  const response = await fetch(`${API}/users/login`,{
+   //                      method: "POST",
+   //                       headers: {
+   //                          Authorization: `Bearer ${authToken}`,
+   //                      }   
+   //              });
 
-     return <>
+   //                   if(!response.ok){
+   //                      throw new Error('Falied to fetch user role');
+   //                   } 
+   //                   const data = await response.json();
+   //                   setUserRole(data.role);
+   //                   setAuthToken(data.token);
+   //              }catch(error){
+   //                  console.log('Error fetching user role:', error);
+   //              }
+   //           }
+   //           };
+   //           fetchUserRole();
+
+   //   }, [authToken]);
+     
+   //   if(!authToken){
+   //        return <Navigate replace to= '/' />;
+   //   }
+
+   //   if(!userRole || !requiredRoles.includes(userRole)){
+   //      return <Navigate replace to= '/unauthorized' />;
+   //   }
+
+   //   return <>
             
-            { children }
-           </>
+   //          { children }
+   //         </>
 }
 
-// export function ProtectedRoute({ children }){
-//     const authToken = localStorage.getItem("x-auth-token");
-//               console.log("localStorage",typeof authToken);
-//     if(authToken && authToken !== "null" ){
-//         return <>
-            
-//              { children }
-//         </>
-//     }else{
-//         return <Navigate replace to= '/' />
-//     }
-// }
+
 

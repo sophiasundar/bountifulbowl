@@ -1,36 +1,32 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Figure from 'react-bootstrap/Figure';
-import { API } from '../global.js'
-import { AuthProvider } from "../Context/AuthContext.js";
+import { AuthContext, AuthProvider } from "../Context/AuthContext.js";
 
 const LogIn=()=>{
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+   
+    const [credent, setCredent] = useState({ username: '', password: '' });
+    const { login } = useContext(AuthContext);
     const [state,setState] = useState('login');
-    const [userRole, setUserRole] = useState(null);
     const [validated,setValidated] = useState(false);
     const navigate = useNavigate();
 
 
-      const data ={
-          email,
-          password, 
-      }
+     
          
       const handleSubmit = async (e)=>{
           setState("Submitting...")
           e.preventDefault();
 
-          if(data.email===""){
+          if(credent.email===""){
             setValidated("Email is required and valid");
             return;
-        }else if(data.password==="" || data.password.length < 4){
+        }else if(credent.password==="" || credent.password.length < 4){
             setValidated("Password is required and more than 5 chr");
             return;
         }else{
@@ -47,32 +43,14 @@ const LogIn=()=>{
         
         
             try{
-              const response = await fetch(`${API}/users/login`,{
-                method: "POST",
-                body: JSON.stringify(data),
-                headers: {
-                  "Content-Type": "application/json",
-                }   
-        })
-
-       
-          let datum = await response.json()
-          if(response.ok){
-            console.log(datum);
-            const authToken = localStorage.setItem("x-auth-token",datum.token);
-             localStorage.setItem("user-role",datum.role);
-            setUserRole(datum.role); 
-            console.log("localStorage", authToken);
-            console.log("localStorage", userRole)
-             alert('Successfully LoggedIn')
-             navigate("/banquetdashboard");
-          } else {
-            alert('Invalid Credentials')
-            navigate("/");
-         }
-        }catch(error){
-            console.error("Login failed!", error);
+              
+               await login(credent);
+                navigate("/banquetdashboard");
+            
+        }catch(err){
+            console.error("err");
             setState("");
+            
         }
 
 
@@ -115,8 +93,8 @@ const LogIn=()=>{
                 aria-label="Enter Your Email Address"
                 placeholder="Enter Your Email Address"
                 aria-describedby="inputGroup-sizing-sm"
-                onChange={(e) => setEmail(e.target.value)}
-                value={data.email}
+                onChange={(e) => setCredent({...credent, email: e.target.value})}
+                value={credent.email}
                 />
 
                 </Form.Group>
@@ -131,8 +109,8 @@ const LogIn=()=>{
                 aria-describedby="inputGroup-sizing-sm"
                 placeholder="Enter Your Password"
                 type="password"
-                onChange={(e) => setPassword(e.target.value)}
-                value={data.password}
+                onChange={(e) => setCredent({...credent, password: e.target.value})}
+                value={credent.password}
                 />
 
                 </Form.Group>

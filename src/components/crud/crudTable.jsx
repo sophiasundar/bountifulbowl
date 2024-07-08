@@ -18,18 +18,28 @@ import { IoMdPersonAdd } from "react-icons/io";
       
     
       const navigate = useNavigate()
-      const getTable= () => {
-          
-        axios.get(`${API}/crud/foodlist`)
-        .then((res)=>{
-            if(res.status === 401){
-                console.log(" Data Not Found ! ")
+      const getTable= async () => {
+
+
+        try{
+          const token = localStorage.getItem('x-auth-token');
+          const res = await axios.get(`${API}/crud/foodlist`,{
+            headers:{
+              Authorization: 'Bearer ' + token 
             }
-            console.log(res.data);
-            
-          setTableData(res.data);
-          
-            })
+          });
+
+          if(res.status === 200){
+              console.log('Banquet data fetched successfully');
+              setTableData(res.data);
+          } else if (res.status === 401){
+            console.log(" Unauthorized access. Please login again.")
+        }
+
+        }catch(error){
+          console.error('Error fetching data:', error);
+        }
+        
       };
 
         useEffect(()=>{
