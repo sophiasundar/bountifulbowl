@@ -1,3 +1,4 @@
+import 'react-toastify/dist/ReactToastify.css';
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
@@ -6,6 +7,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Figure from 'react-bootstrap/Figure';
 import { AuthContext, AuthProvider } from "../Context/AuthContext.js";
+import { ToastContainer, toast } from 'react-toastify';
+
+
 
 const LogIn=()=>{
 
@@ -14,6 +18,7 @@ const LogIn=()=>{
     const { login } = useContext(AuthContext);
     const [state,setState] = useState('login');
     const [validated,setValidated] = useState(false);
+    // const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
 
@@ -48,22 +53,26 @@ const LogIn=()=>{
                 navigate("/banquetdashboard");
             
         }catch(err){
-            console.error("err");
+            console.error("Login error:", err);
             setState("");
+            toast.error('Test message');
+
+            if(err.response?.status === 401){
+                 toast('Invalid username or password.');
+            } else{
+                toast('An error occured. Please try again later.');
+            }
             
-        }
-
-
-
-
-          
-
-
-      };
+        } 
+    };
 
       return(
         <>
+         <ToastContainer/>
+
+         
             <AuthProvider>
+               
            <div className="scontainer">
 
                 <div className="form">
@@ -85,6 +94,9 @@ const LogIn=()=>{
                 <Form onSubmit={handleSubmit}  >
                 <h6 className="svalid">{validated}</h6>
 
+                {/* {errorMessage && (
+                 <h6 className="svalid">{errorMessage}</h6>
+                )} */}
 
                 <Row xs={2} md={4} lg={6}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
