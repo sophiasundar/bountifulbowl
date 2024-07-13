@@ -12,14 +12,17 @@ import SendEmail from './components/banquetDashboard/sendEmail';
 import {  AuthProvider } from './components/Context/AuthContext';
 import { ProtectedRoute } from './components/protectedRoute.jsx';
 import { Authorise } from './components/authorise.jsx';
+import AddOrphForm from './components/orphanage/addOrphForm.jsx';
+import { EditOForm } from './components/orphanage/EditOrphForm.jsx';
 
 
 
 
 
 function App() {
-  // const { user, login } = useContext(AuthContext)
+ 
   const [tableData, setTableData] = useState([])
+  const [ orphData, setOrphData] = useState([])
 
   
   return (
@@ -61,6 +64,18 @@ function App() {
       <Route path='/editform/:id' element = {
       <ProtectedRoute allowedRoles={['Banquet-Manager']} >
       <EditForm tableData={tableData} setTableData={setTableData}/>
+      </ProtectedRoute>
+      }></Route>
+
+      <Route path='/addorphinfo' element = {
+         <ProtectedRoute allowedRoles={['orphanage-manager']} >
+          <AddOrphForm orphData={orphData} setOrphData={setOrphData}/>
+      </ProtectedRoute>
+      }></Route>
+
+      <Route path='/editorphinfo/:id' element = {
+      <ProtectedRoute allowedRoles={['orphanage-manager']} >
+        <EditOForm orphData={orphData} setOrphData={setOrphData}/>
       </ProtectedRoute>
       }></Route>
 

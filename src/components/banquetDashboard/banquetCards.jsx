@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -21,12 +21,8 @@ function BanquetCard({ value }){
         <>
          <AuthProvider>
 
-         <div className={`banquet-card ${selected ? 'selected' : ''}`} onClick={handleClick} >
-        <div className='bancardContainer' >
-
-            
- 
-        <Card className='card' >
+        <div  className={`cardContainer ${selected ? 'selected' : ''}`} onClick={handleClick} >  
+            <Card className='bancard' >
 
         
         <Card.Title className="title" ><b>{value.hallname}</b> <MdFoodBank color="brown" size={40}/></Card.Title>
@@ -54,7 +50,7 @@ function BanquetCard({ value }){
                     
                   
                     
-                    <Button className='btn1' variant='primary'
+                    <Button  variant='primary'
                        onClick={()=>{
                         navigate(`/sendemail`)
                       }}
@@ -76,7 +72,7 @@ function BanquetCard({ value }){
         </Card>
 
         </div>
-        </div>
+       
 
         </AuthProvider>
         </>

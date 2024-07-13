@@ -1,4 +1,3 @@
-import 'react-toastify/dist/ReactToastify.css';
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -9,7 +8,6 @@ import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import Button from 'react-bootstrap/Button';
 import { IoMdPersonAdd } from "react-icons/io";
-import { ToastContainer, toast } from 'react-toastify';
 import { AuthContext } from '../Context/AuthContext';
 
 
@@ -34,7 +32,6 @@ import { AuthContext } from '../Context/AuthContext';
               console.log('Banquet data fetched successfully');
               setTableData(res.data);
           } else if (res.status === 401){
-            toast(" Unauthorized access ")
             console.log(" Unauthorized access. Please login again.")
         }
 
@@ -55,7 +52,6 @@ import { AuthContext } from '../Context/AuthContext';
 
         const handleDelete = async (id) => {
             try {
-              const token = localStorage.getItem('x-auth-token');
               const response = await axios.delete(`${API}/crud/foodlist/${id}`,{
                     headers:{
                       Authorization: 'Bearer ' + token
@@ -65,7 +61,7 @@ import { AuthContext } from '../Context/AuthContext';
                 setTableData(tableData.filter((item) => item.id !== id)); 
                 console.log('Record deleted successfully');
               } else if (response.status === 401){
-                toast(" Unauthorized access ")
+                
                 console.log(" Unauthorized access. Please login again.")
             } else {
                 console.error('Deletion failed:', response.statusText);
@@ -80,7 +76,7 @@ import { AuthContext } from '../Context/AuthContext';
         return(
             <div >
                <NavBar/>
-               <ToastContainer/>
+               
                <div className="addtable">
                <h3 >Manage Banquet Hall Details</h3>
 
