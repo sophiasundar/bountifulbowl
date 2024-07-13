@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import 'react-toastify/dist/ReactToastify.css';
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import {API} from '../global.js';
@@ -8,21 +9,21 @@ import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import Button from 'react-bootstrap/Button';
 import { IoMdPersonAdd } from "react-icons/io";
-
-
+import { ToastContainer, toast } from 'react-toastify';
+import { AuthContext } from '../Context/AuthContext';
 
 
 
     function CrudTable(){
       const [tableData, setTableData] = useState([])
-      
+      const { token } = useContext(AuthContext);
     
       const navigate = useNavigate()
       const getTable= async () => {
 
 
         try{
-          const token = localStorage.getItem('x-auth-token');
+          
           const res = await axios.get(`${API}/crud/foodlist`,{
             headers:{
               Authorization: 'Bearer ' + token 
@@ -33,6 +34,7 @@ import { IoMdPersonAdd } from "react-icons/io";
               console.log('Banquet data fetched successfully');
               setTableData(res.data);
           } else if (res.status === 401){
+            toast(" Unauthorized access ")
             console.log(" Unauthorized access. Please login again.")
         }
 
@@ -43,7 +45,7 @@ import { IoMdPersonAdd } from "react-icons/io";
       };
 
         useEffect(()=>{
-         getTable();
+         getTable()
           
         },[]);
 
@@ -53,12 +55,19 @@ import { IoMdPersonAdd } from "react-icons/io";
 
         const handleDelete = async (id) => {
             try {
-              // console.log('Deleting item:', id);
-              const response = await axios.delete(`${API}/crud/foodlist/${id}`);
+              const token = localStorage.getItem('x-auth-token');
+              const response = await axios.delete(`${API}/crud/foodlist/${id}`,{
+                    headers:{
+                      Authorization: 'Bearer ' + token
+                    }
+              });
               if (response.status === 200) {
                 setTableData(tableData.filter((item) => item.id !== id)); 
                 console.log('Record deleted successfully');
-              } else {
+              } else if (response.status === 401){
+                toast(" Unauthorized access ")
+                console.log(" Unauthorized access. Please login again.")
+            } else {
                 console.error('Deletion failed:', response.statusText);
               }
             } catch (error) {
@@ -66,13 +75,12 @@ import { IoMdPersonAdd } from "react-icons/io";
             }
        };
 
-      //  const handleAddForm = () => {
-      //   setShowAddForm(!showAddForm)
-      //  }
+      
       
         return(
             <div >
                <NavBar/>
+               <ToastContainer/>
                <div className="addtable">
                <h3 >Manage Banquet Hall Details</h3>
 

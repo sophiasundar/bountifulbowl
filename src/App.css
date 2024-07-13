@@ -19,6 +19,7 @@
 
 .hall{
   text-align: center;
+  margin-top: 20px;
 }
 
 .addtable{
@@ -49,6 +50,10 @@
       justify-content: center;
       margin-right: 40px;
     }
+}
+
+.lab{
+  margin-left: 30px;
 }
 .itemSpecs{
   margin-left: 10px;
@@ -185,7 +190,19 @@ border-radius: 10px;
   padding-right: 10px;
 }
 
+.bancardContainer{
+   display:flex;
+   flex-direction: row;
+  margin-left: 100px; 
+  margin-right: 20px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  padding-left: 10px; 
+  padding-right: 10px;
+}
+
 .card{
+ 
   
   width:320px;
   height:640px;
@@ -232,8 +249,9 @@ border-radius: 10px;
 
 
 .input3{
+  margin-left: 20px;
+  width: 500px;
   
-  width: 400px;
 }
 
 
@@ -246,6 +264,7 @@ border-radius: 10px;
 .addbtn{
  
  justify-content: space-between ;
+ margin-bottom: 30px;
 }
 
 .addbtn1{
@@ -261,9 +280,20 @@ border-radius: 10px;
   margin-top: 40px;
     margin-bottom: 50px;
     justify-content: center;
-    margin-left: 250px;
+    margin-left: 350px;
 }
 
 .aufig{
-  margin-left: 250px;
+  margin-left: 290px;
+}
+
+.back{
+  margin-left: 200px;
+  margin-top: 30px;
+}
+
+.error-message{
+  color: red;
+  font-weight: bold;
+  margin-bottom: 10px;
 }

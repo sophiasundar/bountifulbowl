@@ -1,26 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import { API } from '../global';
-
+import { AuthContext } from '../Context/AuthContext';
 
 
 export function EditForm(){
     const {id} = useParams();
     const [hall,setHall] = useState();
+    const { token } = useContext(AuthContext);
 
     useEffect(()=>{
-
-        axios.get(`${API}/crud/foodlist/${id}`)
+       
+        axios.get(`${API}/crud/foodlist/${id}`,{
+            headers:{
+                Authorization: 'Bearer ' + token 
+              }
+        })
         .then((res)=>{
             console.log(res.data);
             setHall(res.data);
         })
+        .catch(error => {
+            if (error.response && error.response.status === 401) {
+             console.error('Unauthorized request! Please check your authentication credentials.');
+            } else {
+               console.error('Error:', error);
+            }  
+          })
 
-    },[id]);
+    },[token,id]);
 
 
      if(hall){
@@ -42,7 +54,7 @@ function EditHallForm({hall, id}){
     const [time,setTime] = useState(hall.time)
     const [foodlist,setFoodlist] = useState(hall.foodlist)
     const [foodquantity,setFoodQuantity] = useState(hall.foodquantity) 
-    
+    const { token } = useContext(AuthContext);
     const [validated, setValidated] = useState(false);
 
     const navigate = useNavigate()
@@ -96,20 +108,20 @@ function EditHallForm({hall, id}){
         }
          setValidated(true);
 
-        //  if (!isAuthenticated) {
-        //   setValidated('Error: You are not authorized to add data.');
-        //   return; // Prevent submission if not authenticated
-        // }
-    
+        
 
-         fetch(`${API}/crud/foodlist/${hall._id}`,{
-           method: "PUT",
-           body:JSON.stringify(newDetails),
+         axios.put(`${API}/crud/foodlist/${hall._id}`,newDetails,{
            headers:{
-            "Content-Type": "application/json",
-            //  Authorization: `Bearer ${token}`
+              Authorization: `Bearer ${token} `
            },
          }).then((data)=>data.json())
+            .catch(error => {
+            if (error.response && error.response.status === 401) {
+             console.error('Unauthorized request! Please check your authentication credentials.');
+            } else {
+               console.error('Error:', error);
+            }  
+          })
          .then(()=>navigate('/banquetcrud'))
         }
 
@@ -122,7 +134,7 @@ function EditHallForm({hall, id}){
 
             <h4 className="valid" >{validated}</h4>
                 <Form.Group className="mb-3" controlId="hallname">
-                    <Form.Label className="lab">Hall Name :</Form.Label>
+                    <Form.Label className="lab"><b>Hall Name :</b></Form.Label>
                     <Form.Control className='input3' type="text" placeholder="Enter The Hall Name"
                             value={hallname}
                             onChange={(e)=>
@@ -132,7 +144,7 @@ function EditHallForm({hall, id}){
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="name">
-                    <Form.Label className="lab">Name :</Form.Label>
+                    <Form.Label className="lab"><b>Name :</b></Form.Label>
                     <Form.Control className="input3" type="text" placeholder="Enter The Name" 
                         value={name}
                         onChange={(e)=>{
@@ -142,7 +154,7 @@ function EditHallForm({hall, id}){
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="address">
-                    <Form.Label className="lab">Address :</Form.Label>
+                    <Form.Label className="lab"><b>Address :</b></Form.Label>
                     <Form.Control className="input3" type="text" placeholder="Enter The Address" 
                         value={address}
                         onChange={(e)=>{
@@ -152,7 +164,7 @@ function EditHallForm({hall, id}){
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="email">
-                    <Form.Label className="lab">Email :</Form.Label>
+                    <Form.Label className="lab"><b>Email :</b></Form.Label>
                     <Form.Control className='input3' type="text" placeholder="Enter The Email"
                             value={email}
                             onChange={(e)=>
@@ -162,7 +174,7 @@ function EditHallForm({hall, id}){
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="date">
-                    <Form.Label className="lab">Food Takein Date :</Form.Label>
+                    <Form.Label className="lab"><b>Food Takein Date :</b></Form.Label>
                     <Form.Control className="input3" type="text" placeholder="Enter The Food Takein Date" 
                         value={date}
                         onChange={(e)=>{
@@ -172,7 +184,7 @@ function EditHallForm({hall, id}){
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="time">
-                    <Form.Label className="lab">Food Takein Time :</Form.Label>
+                    <Form.Label className="lab"><b>Food Takein Time :</b></Form.Label>
                     <Form.Control className='input3' type="text" placeholder="Enter The Food Takein Time" 
                             value={time}
                             onChange={(e)=>{
@@ -182,7 +194,7 @@ function EditHallForm({hall, id}){
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="foodlist">
-                    <Form.Label className="lab">Foodlist :</Form.Label>
+                    <Form.Label className="lab"><b>Foodlist :</b></Form.Label>
                     <Form.Control  className='input3' type="text" placeholder="Enter The Foodlist" 
                             value={foodlist}
                             onChange={(e)=>{
@@ -192,7 +204,7 @@ function EditHallForm({hall, id}){
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="food quantity">
-                    <Form.Label className="lab">Food Quantity :</Form.Label>
+                    <Form.Label className="lab"><b>Food Quantity :</b></Form.Label>
                     <Form.Control className='input3' type="text" placeholder="Enter The Food Quantity" 
                         value={foodquantity}
                         onChange={(e)=>{

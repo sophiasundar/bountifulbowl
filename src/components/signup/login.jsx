@@ -1,4 +1,3 @@
-import 'react-toastify/dist/ReactToastify.css';
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
@@ -7,7 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Figure from 'react-bootstrap/Figure';
 import { AuthContext, AuthProvider } from "../Context/AuthContext.js";
-import { ToastContainer, toast } from 'react-toastify';
+
 
 
 
@@ -17,8 +16,8 @@ const LogIn=()=>{
     const [credent, setCredent] = useState({ username: '', password: '' });
     const { login } = useContext(AuthContext);
     const [state,setState] = useState('login');
+    const [error,setError] = useState('');
     const [validated,setValidated] = useState(false);
-    // const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
 
@@ -55,12 +54,14 @@ const LogIn=()=>{
         }catch(err){
             console.error("Login error:", err);
             setState("");
-            toast.error('Test message');
+            
+            
 
             if(err.response?.status === 401){
-                 toast('Invalid username or password.');
+                console.log("Setting error state: Invalid username or password.");
+                setError('Invalid username or password.');
             } else{
-                toast('An error occured. Please try again later.');
+                setError('An error occured. Please try again later.');
             }
             
         } 
@@ -68,13 +69,13 @@ const LogIn=()=>{
 
       return(
         <>
-         <ToastContainer/>
+         
 
          
             <AuthProvider>
                
            <div className="scontainer">
-
+          
                 <div className="form">
                     <div className="login">
                 <Col >
@@ -92,11 +93,9 @@ const LogIn=()=>{
                 
 
                 <Form onSubmit={handleSubmit}  >
+               {error&&<div className="error-message">{error}</div>} 
+                
                 <h6 className="svalid">{validated}</h6>
-
-                {/* {errorMessage && (
-                 <h6 className="svalid">{errorMessage}</h6>
-                )} */}
 
                 <Row xs={2} md={4} lg={6}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -131,6 +130,7 @@ const LogIn=()=>{
                 
 
                 </Form>
+                
                 <Button variant="primary" type="submit" className="loginbtn"
                 onClick = {(e)=>handleSubmit(e)}
                 >{state}</Button>{' '}

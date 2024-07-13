@@ -64,11 +64,7 @@ function App() {
       </ProtectedRoute>
       }></Route>
 
-     <Route path='/sendemail' element = {
-      <ProtectedRoute  >
-      <SendEmail/>
-      </ProtectedRoute>
-      }></Route>
+     <Route path='/sendemail' element = {<SendEmail/>}></Route>
 
 
 

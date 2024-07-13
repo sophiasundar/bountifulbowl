@@ -1,6 +1,5 @@
 import { Navigate } from "react-router-dom";
 import React, { useContext } from 'react';
-// import { API } from './global.js'
 import { AuthContext } from "./Context/AuthContext.js";
 
 export function ProtectedRoute({ children, allowedRoles }){

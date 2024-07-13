@@ -4,20 +4,20 @@ import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
 import { GiBerriesBowl } from "react-icons/gi";
-import React from 'react';
-
+import React, { useContext }from 'react';
+import { AuthContext } from '../Context/AuthContext';
  
 
     function NavBar(){
        const navigate = useNavigate()
-       
+       const { logout } = useContext(AuthContext);
        
         
        const handleLogout = () =>{
-             localStorage.removeItem('x-auth-token')
-             localStorage.removeItem('user-role')
+             
+             logout()
              alert('Successfully LoggedOut')
-             navigate('/')
+             navigate('/');
        } 
        
        return(

@@ -1,15 +1,16 @@
-import React, { useState} from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { API } from '../global.js';
-// import { AuthContext } from '../Context/AuthContext.js';
+import axios from 'axios';
+import { AuthContext } from '../Context/AuthContext.js';
 
 
 
 function AddForm({setTableData }){
-  // const { isAuthenticated, token } = useContext(AuthContext)
-
+  
+    const { token } = useContext(AuthContext);
     const [hallname,setHallName] = useState("")
     const [name,setName] = useState("")
     const [address,setAddress] = useState("")
@@ -72,25 +73,24 @@ function AddForm({setTableData }){
         }
          setValidated(true);
 
-        //  if (!isAuthenticated) {
-        //   setValidated('Error: You are not authorized to add data.');
-        //   return; // Prevent submission if not authenticated
-        // }
-    
-
-         fetch(`${API}/crud/foodlist`,{
-           method: "POST",
-           body:JSON.stringify(newDetails),
+        
+         axios.post(`${API}/crud/foodlist`, newDetails, {
            headers:{
-            "Content-Type": "application/json",
-            //  Authorization: `Bearer ${token}`
-           },
-         }).then((data)=>data.json())
+              Authorization: `Bearer ${token} `
+          }
+           })
          .then((res)=>{
-           setTableData(res);
-           console.log(res)
+           setTableData(res.data);
+           console.log(res.data)
          })
-         .then(()=>navigate('/banquetcrud'))
+         .catch(error => {
+          if (error.response && error.response.status === 401) {
+           console.error('Unauthorized request! Please check your authentication credentials.');
+          } else {
+             console.error('Error:', error);
+          }  
+        })
+         .then(()=>navigate('/banquetcrud'));
     }
 
     return(
@@ -102,8 +102,8 @@ function AddForm({setTableData }){
 
                 <h4 className="valid" >{validated}</h4>
                     <Form.Group className="mb-3" controlId="hallname">
-                        <Form.Label className="lab">Hall Name :</Form.Label>
-                        <Form.Control className='input3' type="text" placeholder="Enter The Hall Name"
+                        <Form.Label className='input3'><b>Hall Name :</b></Form.Label>
+                        <Form.Control className="lab"  type="text" placeholder="Enter The Hall Name"
                               value={hallname}
                               onChange={(e)=>
                                 {setHallName(e.target.value)}
@@ -112,7 +112,7 @@ function AddForm({setTableData }){
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="name">
-                        <Form.Label>Name :</Form.Label>
+                        <Form.Label className='input3'><b>Name :</b></Form.Label>
                         <Form.Control className="lab" type="text" placeholder="Enter The Name" 
                              value={name}
                              onChange={(e)=>{
@@ -122,7 +122,7 @@ function AddForm({setTableData }){
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="address">
-                        <Form.Label>Address :</Form.Label>
+                        <Form.Label className='input3'><b>Address :</b></Form.Label>
                         <Form.Control className="lab" type="text" placeholder="Enter The Address" 
                             value={address}
                             onChange={(e)=>{
@@ -132,7 +132,7 @@ function AddForm({setTableData }){
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="email">
-                        <Form.Label>Email :</Form.Label>
+                        <Form.Label className='input3'><b>Email :</b></Form.Label>
                         <Form.Control className="lab" type="text" placeholder="Enter The Email"
                               value={email}
                               onChange={(e)=>
@@ -142,7 +142,7 @@ function AddForm({setTableData }){
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="date">
-                        <Form.Label>Food Takein Date :</Form.Label>
+                        <Form.Label className='input3'><b>Food Takein Date :</b></Form.Label>
                         <Form.Control className="lab" type="text" placeholder="Enter The Food Takein Date" 
                              value={date}
                              onChange={(e)=>{
@@ -152,7 +152,7 @@ function AddForm({setTableData }){
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="time">
-                        <Form.Label>Food Takein Time :</Form.Label>
+                        <Form.Label className='input3'><b>Food Takein Time :</b></Form.Label>
                         <Form.Control className="lab" type="text" placeholder="Enter The Food Takein Time" 
                               value={time}
                               onChange={(e)=>{
@@ -162,7 +162,7 @@ function AddForm({setTableData }){
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="foodlist">
-                        <Form.Label>Foodlist :</Form.Label>
+                        <Form.Label className='input3'><b>Foodlist :</b></Form.Label>
                         <Form.Control  className="lab" type="text" placeholder="Enter The Foodlist" 
                               value={foodlist}
                               onChange={(e)=>{
@@ -172,7 +172,7 @@ function AddForm({setTableData }){
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="food quantity">
-                        <Form.Label>Food Quantity :</Form.Label>
+                        <Form.Label className='input3'><b>Food Quantity :</b></Form.Label>
                         <Form.Control className="lab" type="text" placeholder="Enter The Food Quantity" 
                             value={foodquantity}
                             onChange={(e)=>{

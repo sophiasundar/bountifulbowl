@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { MdFoodBank } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
-// import { AuthProvider } from '../Context/AuthContext';
+import { AuthProvider } from '../Context/AuthContext';
 
 
 function BanquetCard({ value }){
@@ -19,10 +19,10 @@ function BanquetCard({ value }){
     
     return(
         <>
-         {/* <AuthProvider> */}
+         <AuthProvider>
 
          <div className={`banquet-card ${selected ? 'selected' : ''}`} onClick={handleClick} >
-        <div className='cardContainer' >
+        <div className='bancardContainer' >
 
             
  
@@ -78,7 +78,7 @@ function BanquetCard({ value }){
         </div>
         </div>
 
-        {/* </AuthProvider> */}
+        </AuthProvider>
         </>
     )
 }
