@@ -55,7 +55,7 @@ function BanquetCard({ value }){
                         navigate(`/sendemail`)
                       }}
                     >
-                     Send Email       
+                     Agree To Take In    
                     
                 </Button>
                 <p className="takein">Note: Check the Given time and take the food before get wasted</p>

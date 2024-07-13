@@ -17,7 +17,7 @@ export const Authorise =()=>{
                         Back
                     </Button>
 
-       <h4 className='hauth'>You are Not Authorise to CRUD Page</h4>
+       <h4 className='hauth'>You are unauthorized to access this page.</h4>
 
        <br></br>
        <Figure className="aufig">

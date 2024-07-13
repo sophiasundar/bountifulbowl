@@ -2,7 +2,7 @@ import Form from 'react-bootstrap/Form';
 import { useState, useEffect } from 'react';
 import { API } from '../global';
 import Button from 'react-bootstrap/Button';
-
+import { useNavigate } from 'react-router-dom';
 
 
 function SendEmail(){
@@ -15,6 +15,7 @@ function SendEmail(){
     const [banquetemails, setBanquetEmails] = useState([]);
     const [selectedBanquetEmail, setSelectedBanquetEmail] = useState('');
 
+    const navigate = useNavigate()
 
 
     const [validated, setValidated] = useState(false);
@@ -116,8 +117,8 @@ function SendEmail(){
              {/* form */}
              <h4 className="valid" >{validated}</h4>
                             <Form.Group className="mb-3" controlId="hallname">
-                        <Form.Label >Orphanage Name :</Form.Label>
-                        <Form.Control  type="text" placeholder="Enter The Orphanage Name"
+                        <Form.Label className="lab" >Orphanage Name :</Form.Label>
+                        <Form.Control className='input3' type="text" placeholder="Enter The Orphanage Name"
                               value={orphanagename}
                               onChange={(e)=>
                                 {setOrphanageName(e.target.value)}
@@ -126,8 +127,8 @@ function SendEmail(){
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="name">
-                        <Form.Label> Name :</Form.Label>
-                        <Form.Control  type="text" placeholder="Enter The Orphanage Manager Name" 
+                        <Form.Label className="lab" > Name :</Form.Label>
+                        <Form.Control className='input3' type="text" placeholder="Enter The Orphanage Manager Name" 
                              value={name}
                              onChange={(e)=>{
                                setName(e.target.value)
@@ -136,8 +137,8 @@ function SendEmail(){
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="address">
-                        <Form.Label>Orphanage Address :</Form.Label>
-                        <Form.Control  type="text" placeholder="Enter The Orphanage Address" 
+                        <Form.Label className="lab">Orphanage Address :</Form.Label>
+                        <Form.Control className='input3' type="text" placeholder="Enter The Orphanage Address" 
                             value={address}
                             onChange={(e)=>{
                               setAddress(e.target.value)
@@ -146,8 +147,8 @@ function SendEmail(){
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="email">
-                        <Form.Label>Email :</Form.Label>
-                        <Form.Control  type="email" placeholder="Enter The Email"
+                        <Form.Label className="lab">Email :</Form.Label>
+                        <Form.Control className='input3'  type="email" placeholder="Enter The Email"
                               value={email}
                               onChange={(e)=>
                                 {setEmail(e.target.value)}
@@ -156,8 +157,8 @@ function SendEmail(){
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="name">
-                        <Form.Label>Banquet Name :</Form.Label>
-                        <Form.Control  type="text" placeholder="Enter The Banquet Name"
+                        <Form.Label className="lab">Banquet Name :</Form.Label>
+                        <Form.Control className='input3' type="text" placeholder="Enter The Banquet Name"
                               value={banquetname}
                               onChange={(e)=>
                                 {setBanquetName(e.target.value)}
@@ -166,8 +167,8 @@ function SendEmail(){
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="name">
-                        <Form.Label>Banquet Manager Name :</Form.Label>
-                        <Form.Control  type="text" placeholder="Enter The Manager Name"
+                        <Form.Label className="lab" > Banquet Manager Name :</Form.Label>
+                        <Form.Control className='input3' type="text" placeholder="Enter The Manager Name"
                               value={banmanagername}
                               onChange={(e)=>
                                 {setBanManagerName(e.target.value)}
@@ -177,14 +178,8 @@ function SendEmail(){
 
                     <Form.Group className="mb-3" controlId="email">
                        
-                        {/* <Form.Control  type="email" placeholder="Enter The Manager Email"
-                              value={banquetemail}
-                              onChange={(e)=>
-                                {setBanquetEmail(e.target.value)}
-                              }    
-                        /> */}
-                         <Form.Label>Banquet Email :</Form.Label>
-                         <Form.Select aria-label="Default select example"
+                         <Form.Label className="lab" >Banquet Email :</Form.Label>
+                         <Form.Select  aria-label="Default select example"
                               value={selectedBanquetEmail}
                               onChange={(e)=>
                                 {setSelectedBanquetEmail(e.target.value)}
@@ -197,10 +192,23 @@ function SendEmail(){
                         </Form.Select>
                     </Form.Group>
 
-                   <Button className="btn1" type='submit' onClick={handleSubmit}>
+                  
+
+                        <div className='addbtn'>
+
+                        <Button type='submit' onClick={handleSubmit}>
                             
-                            Agree To Take In
+                            Send Email
                         </Button>
+
+                        <Button className='addbtn2' variant="primary"
+                                    onClick={()=>{
+                                        navigate('/banquetdashboard')
+                                    }}
+                        >
+                            Back
+                        </Button>
+                        </div>
         </div>
     )
 }
