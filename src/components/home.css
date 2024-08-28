@@ -1,0 +1,17 @@
+/* .welcome{
+    text-align: left;
+    float: right;
+    transform: translateX(5%);
+  } */
+  
+  .welcomeheader{
+    display: flex;
+  justify-content: center;
+ 
+  }
+
+  .center {
+    text-align: center;
+    float: left;
+    transform: translateX(0);
+  }

@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { GiBerriesBowl } from "react-icons/gi";
 import React, { useContext }from 'react';
 import { AuthContext } from '../Context/AuthContext';
- 
+
 
     function NavBar(){
        const navigate = useNavigate()
@@ -22,22 +22,35 @@ import { AuthContext } from '../Context/AuthContext';
        
        return(
             <>
-              <Navbar bg="secondary" data-bs-theme="light">
+              <Navbar sx={{ backgroundColor: 'transparent', boxShadow: 'none', display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center', }}  data-bs-theme="light">
                 <Container>
                 <Button variant="light">
                   <Navbar.Brand href="" variant="light" > Bountiful Bowl <GiBerriesBowl color="blue" size={35}/> </Navbar.Brand>
                   </Button>{' '}
                  
                   <Nav className="me-auto">
-                   
-                  <Button className='addbtn2' variant="primary"
+                 
+                  <Button className='addbtn2' variant='h3' sx={{ my: 3, display: 'block',  fontFamily: 'monospace', fontWeight: 900,
+                    }} style={{ color: 'black' }}
+                                onClick={()=>{
+                                  navigate('/home')
+                                }}
+                    >
+                        Home
+                    </Button> 
+
+                 <Button className='addbtn2' variant='h3' sx={{ my: 3, display: 'block',  fontFamily: 'monospace', fontWeight: 900,
+                    }} style={{ color: 'black' }}
                                 onClick={()=>{
                                   navigate('/banquetdashboard')
                                 }}
                     >
                         Banquet Info
-                    </Button>
-                    <Button className='addbtn3' variant="primary"
+                    </Button> 
+                    <Button className='addbtn3' variant='h3' sx={{ my: 3, display: 'block',  fontFamily: 'monospace', fontWeight: 800,
+                    }} style={{ color: 'black' }}
                                 onClick={()=>{
                                   navigate('/orphanagedashboard')
                                 }}
@@ -45,7 +58,8 @@ import { AuthContext } from '../Context/AuthContext';
                         Orphanage Info
                     </Button>
 
-                    <Button className='addbtn4' variant="primary"
+                    <Button className='addbtn3' variant='h3' sx={{ my: 3, display: 'block',  fontFamily: 'monospace', fontWeight: 800,
+                    }} style={{ color: 'black' }}
                                 onClick={()=>{
                                   navigate('/banquetcrud')
                                 }}

@@ -7,7 +7,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
+import { Link } from 'react-router-dom';
 
 
 const SignUpForm=()=>{
@@ -71,7 +71,7 @@ const SignUpForm=()=>{
       }
    }
      return(
-      <div className="scontainer">
+      <div className="lcontainer">
          <div className="form">
             <div className="signup">
     
@@ -79,9 +79,6 @@ const SignUpForm=()=>{
          
          <Form  onSubmit={handleSubmit}>
 
-         <Row xs={2} md={4} lg={6}>
-         <h3 className="h3sign" style={{color:"black"}}>Create Account</h3>
-          </Row>
           <h6   className="svalid" >{validated}</h6>
 
           <Row xs={2} md={4} lg={6}>
@@ -150,19 +147,14 @@ const SignUpForm=()=>{
          onClick = {handleSubmit}
       
       >{state}</Button>{' '}
-
-         <Button className='signbtn2' variant="primary"
-                                 onClick={()=>{
-                                    navigate('/')
-                                 }}
-                     >
-                        back
-                     </Button>
-
-
+       
+       
       </Row>
+      <div className="plog">
+       <h6 >Already have an account ? <Link to="/">Login</Link>  </h6>
+         </div>
          </Col>
-         
+        
             </div>
          </div>
       </div>

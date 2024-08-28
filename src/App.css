@@ -13,7 +13,7 @@
   margin-left:5%;
   margin-top:1%;
   margin-bottom:2%;
-  background-color:lightpink;
+ 
   
 }
 
@@ -88,6 +88,17 @@ min-height: 100vh;
 display: flex;
 align-items: center;
 justify-content: center;
+margin-left: 400px;
+}
+
+.lcontainer{
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 200px;
+  margin-top: -100px;
 }
 
 .form{
@@ -148,7 +159,7 @@ border-radius: 10px;
 }
 
 .signbtn1{
-  margin-left: 70px;
+  margin-left: 20px;
 }
 
 .signbtn2{
@@ -161,7 +172,7 @@ border-radius: 10px;
   margin-top: 5px;
   border-radius: 5px;
   margin-left: 70px;
-  border-color: aliceblue;
+  border-color: rgb(164, 163, 163);
 }
 
 .input2{
@@ -221,6 +232,7 @@ border-radius: 10px;
 .addbtn3{
   margin-left: 20px;
   margin-right: 20px;
+  font-weight: bold;
 }
 
 .edbtn{
@@ -264,6 +276,7 @@ border-radius: 10px;
 
 .addbtn2{
   margin-left: 40px ;
+  font-weight: bold;
 }
 
 .hauth{
@@ -328,3 +341,9 @@ border-radius: 10px;
   margin-left: 850px;
   margin-top: 10px;
 }
+
+.plog{
+  margin-top: -75px;
+  margin-left: 100px;
+}
+

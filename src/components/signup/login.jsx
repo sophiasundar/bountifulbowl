@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+// import Col from 'react-bootstrap/Col';
 import Figure from 'react-bootstrap/Figure';
 import { AuthContext, AuthProvider } from "../Context/AuthContext.js";
-
+import { Link } from 'react-router-dom';
 
 
 
@@ -18,6 +18,8 @@ const LogIn=()=>{
     const [state,setState] = useState('login');
     const [error,setError] = useState('');
     const [validated,setValidated] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
     const navigate = useNavigate();
 
 
@@ -49,7 +51,7 @@ const LogIn=()=>{
             try{
               
                await login(credent);
-                navigate("/banquetdashboard");
+                navigate("/home");
             
         }catch(err){
             console.error("Login error:", err);
@@ -78,8 +80,8 @@ const LogIn=()=>{
           
                 <div className="form">
                     <div className="login">
-                <Col >
-                <h3 className="h3login" style={{color:"black"}}>Log In</h3>
+                
+               
                 <div className="figdiv">
              <Figure className="fig">
                 <Figure.Image
@@ -139,36 +141,15 @@ const LogIn=()=>{
 
 
                 <div>
-                <h6 className="label">Already have an account? Just LogIn </h6>
+                <h6 className="label">Not have an account? Just <Link to="/signup">SignUp</Link> </h6>
                 </div>
 
-
+               
                 </Row>
-                </Col>
+                
                 </div>
 
-                <div  className="signup">
-
-                <Figure>
-                <Figure.Image
-                width={251}
-                height={251}
-                alt="welcome"
-                src="https://tse1.mm.bing.net/th?id=OIP.MgkugHlSpXm930w6zLbomgHaDt&pid=Api&P=0&h=180"
-                />
-
-                </Figure>
-
-                <Button className='sbutton' variant="primary"
-                    onClick={()=>{
-                    navigate(`/signup`)
-                }
-                }
-                >SIGN UP</Button>
-                <h6 className="hlogin">Not have an account ? Just Signup </h6>
-
-
-                </div>
+        
                 
 
                 </div>

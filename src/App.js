@@ -14,6 +14,7 @@ import { ProtectedRoute } from './components/protectedRoute.jsx';
 import { Authorise } from './components/authorise.jsx';
 import AddOrphForm from './components/orphanage/addOrphForm.jsx';
 import { EditOForm } from './components/orphanage/EditOrphForm.jsx';
+import HomePage from './components/home/home.jsx';
 
 
 
@@ -23,7 +24,7 @@ function App() {
  
   const [tableData, setTableData] = useState([])
   const [ orphData, setOrphData] = useState([])
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   
   return (
     <div className="App">
@@ -36,6 +37,7 @@ function App() {
       <Route path='/signup' element={ <SignUpForm/>}></Route>
 
       <Route path='/notauthorise' element={ <Authorise/>}></Route>
+      <Route path='/home' element={<HomePage isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>}></Route>
        
       <Route path='/banquetdashboard' element={
          <ProtectedRoute allowedRoles={['Banquet-Manager','orphanage-manager']}>

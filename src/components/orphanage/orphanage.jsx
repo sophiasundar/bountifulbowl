@@ -7,6 +7,7 @@ import OrphCard from "./orphanageCards.jsx";
 import { AuthContext } from "../Context/AuthContext.js";
 import Button from 'react-bootstrap/Button';
 import { IoMdPersonAdd } from "react-icons/io";
+import bgbanquet from "../bgbanquet.css";
 
    function OrphanInfo(){
     const [ orphData, setOrphData] = useState([])
@@ -63,7 +64,7 @@ import { IoMdPersonAdd } from "react-icons/io";
         
        
     return(
-        <div>
+        <div className="banquet">
         <NavBar/>
 
         <Button className='addinfo' variant="primary" 

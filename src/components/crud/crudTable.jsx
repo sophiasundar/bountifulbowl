@@ -9,7 +9,7 @@ import { MdDelete } from "react-icons/md";
 import Button from 'react-bootstrap/Button';
 import { IoMdPersonAdd } from "react-icons/io";
 import { AuthContext } from '../Context/AuthContext';
-
+import bgbanquet from "../bgbanquet.css";
 
 
     function CrudTable(){
@@ -74,7 +74,7 @@ import { AuthContext } from '../Context/AuthContext';
       
       
         return(
-            <div >
+            <div className="crudlist" >
                <NavBar/>
                
                <div className="addtable">

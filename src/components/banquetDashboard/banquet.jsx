@@ -3,7 +3,7 @@ import axios from "axios";
 import { API } from "../global.js";
 import BanquetCard from "./banquetCards.jsx";
 import NavBar from "../navbar/navbar";
-
+import bgbanquet from "../bgbanquet.css";
 
 
 
@@ -42,12 +42,14 @@ import NavBar from "../navbar/navbar";
 
         return(
 
-       <div>
+       <div className='banquet'>
 
          <NavBar/>
         
          <h3 className='hall'>Banquet Hall Details</h3>
-         <p className='hall'>Description</p>
+         {/* <p className='hall'>Description</p> */}
+
+         <div className='bancard-container'>
 
          {
             banquetData.map((item)=>{
@@ -61,6 +63,7 @@ import NavBar from "../navbar/navbar";
          
        </div>
         
+       </div>
        )
     }
 
