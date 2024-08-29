@@ -107,7 +107,7 @@ function HomePage({ isLoggedIn }){
                     
 
                    
-                <Card style={{ width: '75rem',  backgroundColor: 'transparent' }}>
+                <Card style={{ width: '73rem',  backgroundColor: 'transparent' }}>
                 <h2 className="header2">How It Works</h2>
                             <Card.Body>
                            
