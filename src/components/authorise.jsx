@@ -11,7 +11,7 @@ export const Authorise =()=>{
     <div>
          <Button className='back' variant="primary"
                                 onClick={()=>{
-                                  navigate('/banquetdashboard')
+                                  navigate('/home')
                                 }}
                     >
                         Back
