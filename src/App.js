@@ -40,31 +40,31 @@ function App() {
       <Route path='/home' element={<HomePage isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>}></Route>
        
       <Route path='/banquetdashboard' element={
-         <ProtectedRoute allowedRoles={['Banquet-Manager','orphanage-manager']}>
+         <ProtectedRoute allowedRoles={['banquet-manager','orphanage-manager']}>
             <Banquet/>
       </ProtectedRoute>
       }></Route>
 
       <Route path='/orphanagedashboard' element={
-        <ProtectedRoute allowedRoles={['Banquet-Manager','orphanage-manager']} >
+        <ProtectedRoute allowedRoles={['banquet-manager','orphanage-manager']} >
       <OrphanInfo/>
       </ProtectedRoute>
       }></Route>
 
       <Route path='/banquetcrud' element = {
-        <ProtectedRoute allowedRoles={['Banquet-Manager']} >
+        <ProtectedRoute allowedRoles={['banquet-manager']} >
       <CrudTable/>
       </ProtectedRoute>
       }></Route>
 
       <Route path='/addform' element = {
-         <ProtectedRoute allowedRoles={['Banquet-Manager']} >
+         <ProtectedRoute allowedRoles={['banquet-manager']} >
       <AddForm tableData={tableData} setTableData={setTableData}/>
       </ProtectedRoute>
       }></Route>
 
       <Route path='/editform/:id' element = {
-      <ProtectedRoute allowedRoles={['Banquet-Manager']} >
+      <ProtectedRoute allowedRoles={['banquet-manager']} >
       <EditForm tableData={tableData} setTableData={setTableData}/>
       </ProtectedRoute>
       }></Route>

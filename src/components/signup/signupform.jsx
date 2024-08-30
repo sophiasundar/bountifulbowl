@@ -133,8 +133,8 @@ const SignUpForm=()=>{
         <Form.Select className='input' name="role" onChange={handleChange}
            value={data.role} enabled >
           <option value="">Select the Role</option>
-          <option value="Banquet-Manager">Banquet-Manager</option>
-          <option value="Orphanage-Manager">Orphanage-Manager</option>
+          <option value="banquet-manager">Banquet-Manager</option>
+          <option value="orphanage-manager">Orphanage-Manager</option>
         </Form.Select>
         
       </Form.Group>
