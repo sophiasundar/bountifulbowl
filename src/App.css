@@ -36,12 +36,10 @@
 }
 
 @media (max-width: 768px) { 
-  body {
-    background-color: lightpink;
-    }
+ 
     .hall{
       text-align: center;
-      background-color: lightpink;
+      
     }
     .logoutbtn{
       height:90px;
