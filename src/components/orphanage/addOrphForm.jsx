@@ -11,7 +11,7 @@ import { AuthContext } from '../Context/AuthContext.js';
 function AddOrphForm({setOrphData}){
      
     const { token } = useContext(AuthContext);
-    const [orphanagename, setOrphanageName] = useState("");
+    const [orphanagename, setorphanagename] = useState("");
     const [name,setName] = useState("")
     const [address,setAddress] = useState("")
     const [email,setEmail] = useState("")
@@ -27,10 +27,11 @@ function AddOrphForm({setOrphData}){
            address:address,
            email: email,
         }
+        console.log(orphanagename)
         console.log(newInfo) 
 
         if(newInfo.orphanagename === ""){
-            setValidated("VALID: Hall Name is required");
+            setValidated("VALID: Orphanage Name is required");
             return;
          }else if(newInfo.name === ""){
             setValidated("VALID: Name is required");
@@ -79,13 +80,14 @@ function AddOrphForm({setOrphData}){
               <h4 className='hall' > Add Orphanage Info </h4>
 
                 <h4 className="valid" >{validated}</h4>
-                    <Form.Group className="mb-3" controlId="orphanagename">
+                    <Form.Group className="mb-3" controlId="name">
                         <Form.Label className='input3'><b>Orphanage Name :</b></Form.Label>
                         <Form.Control className="lab"  type="text" placeholder="Enter The Orphanage Name"
                               value={orphanagename}
                               onChange={(e)=>
-                                {setOrphanageName(e.target.value)}
-                              }    
+                                {setorphanagename(e.target.value)}
+                              }   
+                               
                         />
                     </Form.Group>
 

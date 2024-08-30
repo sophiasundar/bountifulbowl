@@ -20,10 +20,10 @@ import { MdDelete } from "react-icons/md";
                     <Card className='card' >
 
 
-                    <Card.Title className="title" ><b>{value.Orphanagename}</b> <FcHome size={40}/> </Card.Title>
+                    <Card.Title className="title" ><b>{value.orphanagename}</b> <FcHome size={40}/> </Card.Title>
 
                     <ListGroup className="list-group-flush" >
-                                    <ListGroup.Item> <b>Orphanage Name  :  </b> {value.Orphanagename} </ListGroup.Item>
+                                    <ListGroup.Item> <b>Orphanage Name  :  </b> {value.orphanagename} </ListGroup.Item>
                                         <ListGroup.Item> <b>Name  :  </b> {value.name} </ListGroup.Item>
                                         <ListGroup.Item> <b>Address  :  </b> {value.address} </ListGroup.Item>
                                         <ListGroup.Item><b>Email : </b> {value.email}</ListGroup.Item>
