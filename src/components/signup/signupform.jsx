@@ -1,6 +1,6 @@
 // Form.Control
 import * as React from 'react';
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { API } from '../global.js';
 import Form from 'react-bootstrap/Form';
@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../Context/AuthContext.js';
 
 
 const SignUpForm=()=>{
@@ -15,6 +16,8 @@ const SignUpForm=()=>{
      const [state, setState] = useState("Signup")
      const [validated, setValidated] = useState(false);
      const navigate = useNavigate();
+
+     const { roles } = useContext(AuthContext);
 
          const handleChange = (event) => {
             const { name, value } = event.target;
@@ -130,12 +133,20 @@ const SignUpForm=()=>{
         <b><Form.Label className='label1'>Role</Form.Label></b>
         </div>
 
-        <Form.Select className='input' name="role" onChange={handleChange}
-           value={data.role} enabled >
-          <option value="">Select the Role</option>
-          <option value="banquet-manager">Banquet-Manager</option>
-          <option value="orphanage-manager">Orphanage-Manager</option>
-        </Form.Select>
+ 
+                <Form.Select
+                  name="role"
+                  onChange={handleChange}
+                  value={data.role}
+                  className="input"
+                >
+                  <option value="">Select a Role</option>
+                  {Object.entries(roles).map(([key, value]) => (
+                    <option key={key} value={value}>
+                      {key.replace("_", " ").toUpperCase()}
+                    </option>
+                  ))}
+                </Form.Select>
         
       </Form.Group>
       </Row>

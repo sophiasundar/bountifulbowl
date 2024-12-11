@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
-// import Col from 'react-bootstrap/Col';
 import Figure from 'react-bootstrap/Figure';
 import { AuthContext, AuthProvider } from "../Context/AuthContext.js";
 import { Link } from 'react-router-dom';
@@ -18,7 +17,7 @@ const LogIn=()=>{
     const [state,setState] = useState('login');
     const [error,setError] = useState('');
     const [validated,setValidated] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
 
     const navigate = useNavigate();
 
@@ -50,22 +49,18 @@ const LogIn=()=>{
         
             try{
               
-               await login(credent);
-                navigate("/home");
+                const success = await login(credent);
+                if (success) {
+                  navigate("/home");
+                } else {
+                  setState(""); // Reset the state if login failed
+                  setError("Invalid username or password.");
+                }
             
         }catch(err){
             console.error("Login error:", err);
             setState("");
-            
-            
-
-            if(err.response?.status === 401){
-                console.log("Setting error state: Invalid username or password.");
-                setError('Invalid username or password.');
-            } else{
-                setError('An error occured. Please try again later.');
-            }
-            
+            setError('An error occured. Please try again later.');
         } 
     };
 

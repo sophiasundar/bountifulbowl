@@ -42,6 +42,8 @@ import bgbanquet from "../bgbanquet.css";
           },[]);
 
           const handleDelete = async (id) =>{
+            const confirmDelete = window.confirm('Are you sure you want to delete this entry?');
+                if (!confirmDelete) return;
            try{
                const res = await axios.delete(`${API}/orphinfo/${id}`,{
                 headers:{

@@ -1,5 +1,8 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import NavBar from "../navbar/navbar"
 import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 import { GiBerriesBowl } from "react-icons/gi";
 import Carousel from 'react-bootstrap/Carousel';
 import { FaArrowRight } from "react-icons/fa";
@@ -7,20 +10,39 @@ import { FaBowlFood } from "react-icons/fa6";
 import { IoMdTime } from "react-icons/io";
 import { IoIosMailUnread } from "react-icons/io";
 import { GiFoodTruck } from "react-icons/gi";
+import { useContext } from 'react';
+import { AuthContext } from '../Context/AuthContext';
 import home from '../home.css';
 import bgbanquet from "../bgbanquet.css";
 
 
 function HomePage({ isLoggedIn }){
+
+    const { role, isAuthenticated } = useContext(AuthContext);
+    const navigate = useNavigate();
     
 
       
     return(
         <div className='homepic'>
             <NavBar/>
+
             <div className={`welcomeheader ${isLoggedIn ? 'center' : ''}`}>
              <h2 className="header" >WELCOME TO BOUNTIFUL BOWL</h2>
+             {role === 'admin' && (
+                <div className="admin-button">
+                <Button
+                    variant="primary"
+                    onClick={() => navigate('/admin')}
+                >
+                    Go to Admin Dashboard
+                </Button>
+                </div>
+            )}
              </div>
+
+            
+
              <div  className="card-1">
                  
                  <Card style={{ width: '18rem' , height: "18rem", backgroundColor: 'palegreen' }}>
@@ -93,7 +115,7 @@ function HomePage({ isLoggedIn }){
                                     />
                                     <Carousel.Caption>
                                     
-                                    <h3>Join us in making a difference and contributing to a more equitable and food-secure future.  <GiBerriesBowl color="blue" size={35}/> </h3>
+                                    <h3>RBCA is implemented and ADMIN Control. <br></br> Join us in making a difference and contributing to a more equitable and food-secure future.  <GiBerriesBowl color="blue" size={35}/> </h3>
                                     </Carousel.Caption>
                                 </Carousel.Item>
                                 </Carousel>
@@ -165,7 +187,7 @@ function HomePage({ isLoggedIn }){
                             <Card.Body>
                             <GiFoodTruck className="icon" size='30px' />
                                 <Card.Text>
-                                  <p>Pick up Your Food from banaquet hall</p>
+                                  <p>Pick up Your Food from banquet hall</p>
                                
                                 </Card.Text>
                     

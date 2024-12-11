@@ -58,7 +58,7 @@ import bgbanquet from "../bgbanquet.css";
                     }
               });
               if (response.status === 200) {
-                setTableData(tableData.filter((item) => item.id !== id)); 
+                setTableData((prevTableData) => prevTableData.filter((item) => item._id !== id));
                 console.log('Record deleted successfully');
               } else if (response.status === 401){
                 
@@ -133,7 +133,7 @@ import bgbanquet from "../bgbanquet.css";
                          
                         > <MdDelete color="red"
                         
-                        onClick={() =>{ console.log('Delete button clicked'); handleDelete(item._id)}}
+                        onClick={() =>{ handleDelete(item._id)}}
                         /></Button> 
                         </div>    
                         

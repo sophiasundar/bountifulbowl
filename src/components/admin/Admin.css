@@ -1,0 +1,11 @@
+/* AdminDashboard.css */
+.admin-dashboard .sidebar {
+    background: #343a40;
+    color: white;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  
+  .admin-dashboard .main-content {
+    padding: 20px;
+  }
