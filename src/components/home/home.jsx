@@ -198,6 +198,13 @@ function HomePage({ isLoggedIn }){
              </Card.Body>
             </Card>
                 </div>
+                <footer className="footer">
+                <h4>Contact Us</h4>
+                <p>Email: support@bountifulbowl.com</p>
+                <p>Phone: +1 (555) 123-4567</p>
+                <p>Address: 123 Food Drive, Bowlville, Country</p>
+                <p>&copy; 2024 Bountiful Bowl | All rights reserved.</p>
+            </footer>
             
         </div>
     )
