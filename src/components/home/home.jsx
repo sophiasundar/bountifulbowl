@@ -43,7 +43,7 @@ function HomePage({ isLoggedIn }){
 
             
 
-             <div  className="card-1">
+           <div className="card-1">
                  
                  <Card style={{ width: '18rem' , height: "18rem", backgroundColor: 'palegreen' }}>
                     <Card.Img variant="top" src="https://cfaes.osu.edu/sites/cfaes_main/files/CFAES_OrgChart.pdf/news/ThinkstockPhotos-185170282.jpg" />
@@ -64,13 +64,9 @@ function HomePage({ isLoggedIn }){
                     </Card.Body>
                     </Card>
                 
-              </div>
+              </div> 
               
-             <div>
-                
-
-             </div>
-
+            
              <div>
                 <h2 className="header-2">About Bountiful Bowl</h2>
 
